@@ -9,7 +9,7 @@ const libro = require('./rutaLibro');
 router.get('/', (req, res)=>{
     res.json({
         mensaje: 'Bienvenido'
-    })
+    }).status(200);
 })
 
 router.use('/categoria', categoria);

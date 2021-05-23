@@ -1,17 +1,25 @@
-// ejemplo
+const Modulo = require('../models/libroModulo');
 
-// //importamos base de datos para poder hacer los query
-// const qy = require('../dataBase/mysqlConnect');
+const libro_borrar = async(req, res, next)=>{
+    try {   
+        console.log(req.query.id);
+        const exitenciaLibro = await Modulo.exite(req.params.id);
+        if(exitenciaLibro.length === 0)throw new Error('no se encuentra ese libro');
+        const estadoLibro = await Modulo.estado(req.params.id);
+        if(estadoLibro.length === 0)throw new Error('ese libro esta prestado no se puede borrar');
+        const borrarLibro = await Modulo.delete(req.params.id);
+        res.status(200).json('Se borro perfectamente el libro');
+    } catch (err) {
+        if(err.code === undefined){
+            res.status(413).json({
+                error: err.message
+            })
+        }else{
+            next(err);
+        }
+    }
+}
 
-//creamos el controlador este puede ser para la ruta get('/')
-// const libro_lista = async(req, res, next)=>{
-//     try {
-        
-//         aca colocamos toda la logica para llamar los datos de la base de datos
-
-//     } catch (err) {
-        
-//         capturamos los errores y los mostramos en pantalla {error: error que capturamos}
-
-//     }
-// }
+module.exports = {
+    libro_borrar
+}

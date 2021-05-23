@@ -13,7 +13,8 @@ app.use(express.json());
 app.use(morgan('dev'));
 
 //routes
-app.use('/', router);
+app.use(router);
+
 
 app.use((err, req, res, next)=>{
   if(err){
