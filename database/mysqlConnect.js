@@ -2,11 +2,11 @@ const mysql = require('mysql');
 const util = require('util');
 
 const mysqlOptions = {
-    host: "freedb.tech",
-    user: "freedbtech_agustin",
-    password: "12345678a",
+    host: "",
+    user: "",
+    password: "",
     port: 3306,
-    database: "freedbtech_testeando"
+    database: ""
 }
 
 const connection = mysql.createConnection(mysqlOptions)
