@@ -1,17 +1,22 @@
-/*
-ejemplo
+const qy = require('../dataBase/mysqlConnect');
 
-const qy = require('../dataBase/mysqlConnect'); //importamos para crear queries
+class Libro{
 
-class libro {
-
-    static lista() {
-        const query = 'SELECT * FROM libro'
-        const response = qy(query);
-        return response //retorna la lista de libros
+    static estado(id){
+        const query = 'SELECT persona_id FROM libro WHERE persona_id IS  NULL AND libro_id=?';
+        const respuesta = qy(query,[id]);
+        return respuesta
+    }
+    static exite(id){
+        const query = 'SELECT * FROM libro WHERE libro_id =?';
+        const respuesta = qy(query,[id]);
+        return respuesta
+    }
+    static delete(id){
+        const query = 'DELETE FROM `libro` WHERE libro_id=?';
+        const respuesta = qy(query,[id]);
+        return respuesta
     }
 }
 
-module.exports = categoria;
-*/
-//crear: nuevo, lista, detalles, actualizar, prestar, devolver, eliminar
+module.exports = Libro;
