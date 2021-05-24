@@ -13,5 +13,5 @@ router.get('/',(req,res)=>{
  });
 
  router.delete("/:id",controlador.libro_borrar);
-
+ router.put("/:id",controlador.libro_devolver);
 module.exports = router;

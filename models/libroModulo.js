@@ -17,6 +17,11 @@ class Libro{
         const respuesta = qy(query,[id]);
         return respuesta
     }
+    static devolver(id){
+        const query = 'UPDATE libro SET persona_id = NULL WHERE libro_id = ?';
+        const respuesta = qy(query,[id]);
+        return respuesta
+    }
 }
 
 module.exports = Libro;

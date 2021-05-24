@@ -1,5 +1,24 @@
 const Modulo = require('../models/libroModulo');
 
+const libro_devolver = async(req, res, next)=>{
+    try {   
+        console.log(req.query.id);
+        const exitenciaLibro = await Modulo.exite(req.params.id);
+        if(exitenciaLibro.length === 0)throw new Error('no se encuentra ese libro');
+        const estadoLibro = await Modulo.estado(req.params.id);
+        if(estadoLibro.length > 0)throw new Error('ese libro no estaba prestado!');
+        const devolver = await Modulo.devolver(req.params.id);
+        res.status(200).json('se realizo la devolución correctamente');
+    } catch (err) {
+        if(err.code === undefined){
+            res.status(413).json({
+                error: err.message
+            })
+        }else{
+            next(err);
+        }
+    }
+}
 const libro_borrar = async(req, res, next)=>{
     try {   
         console.log(req.query.id);
@@ -21,5 +40,5 @@ const libro_borrar = async(req, res, next)=>{
 }
 
 module.exports = {
-    libro_borrar
+    libro_borrar,libro_devolver
 }
