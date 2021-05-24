@@ -1,13 +1,13 @@
-const Modulo = require('../models/libroModulo');
+const Modelo = require('../models/libroModelo');
 
 const libro_devolver = async(req, res, next)=>{
     try {   
         console.log(req.query.id);
-        const exitenciaLibro = await Modulo.exite(req.params.id);
+        const exitenciaLibro = await Modelo.exite(req.params.id);
         if(exitenciaLibro.length === 0)throw new Error('no se encuentra ese libro');
-        const estadoLibro = await Modulo.estado(req.params.id);
+        const estadoLibro = await Modelo.estado(req.params.id);
         if(estadoLibro.length > 0)throw new Error('ese libro no estaba prestado!');
-        const devolver = await Modulo.devolver(req.params.id);
+        const devolver = await Modelo.devolver(req.params.id);
         res.status(200).json('se realizo la devolución correctamente');
     } catch (err) {
         if(err.code === undefined){
@@ -22,11 +22,11 @@ const libro_devolver = async(req, res, next)=>{
 const libro_borrar = async(req, res, next)=>{
     try {   
         console.log(req.query.id);
-        const exitenciaLibro = await Modulo.exite(req.params.id);
+        const exitenciaLibro = await Modelo.exite(req.params.id);
         if(exitenciaLibro.length === 0)throw new Error('no se encuentra ese libro');
-        const estadoLibro = await Modulo.estado(req.params.id);
+        const estadoLibro = await Modelo.estado(req.params.id);
         if(estadoLibro.length === 0)throw new Error('ese libro esta prestado no se puede borrar');
-        const borrarLibro = await Modulo.delete(req.params.id);
+        const borrarLibro = await Modelo.delete(req.params.id);
         res.status(200).json('Se borro perfectamente el libro');
     } catch (err) {
         if(err.code === undefined){

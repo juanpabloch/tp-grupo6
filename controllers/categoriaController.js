@@ -16,7 +16,7 @@
 //     }
 // }
 
-const Modulo = require('../models/categoriaModulo');
+const Modelo = require('../models/categoriaModelo');
 
 const categoria_lista = async(req, res, next)=>{
     try {   
