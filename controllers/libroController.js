@@ -40,5 +40,5 @@ const libro_borrar = async(req, res, next)=>{
 }
 
 module.exports = {
-    libro_borrar,libro_devolver
+     libro_borrar,libro_devolver
 }
