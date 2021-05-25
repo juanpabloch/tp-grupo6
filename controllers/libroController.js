@@ -3,7 +3,7 @@ const Modelo = require('../models/libroModelo');
 const libro_devolver = async(req, res, next)=>{
     try {   
         console.log(req.query.id);
-        const exitenciaLibro = await Modelo.exite(req.params.id);
+        const exitenciaLibro = await Modelo.existe(req.params.id);
         if(exitenciaLibro.length === 0)throw new Error('no se encuentra ese libro');
         const estadoLibro = await Modelo.estado(req.params.id);
         if(estadoLibro.length > 0)throw new Error('ese libro no estaba prestado!');
@@ -22,7 +22,7 @@ const libro_devolver = async(req, res, next)=>{
 const libro_borrar = async(req, res, next)=>{
     try {   
         console.log(req.query.id);
-        const exitenciaLibro = await Modelo.exite(req.params.id);
+        const exitenciaLibro = await Modelo.existe(req.params.id);
         if(exitenciaLibro.length === 0)throw new Error('no se encuentra ese libro');
         const estadoLibro = await Modelo.estado(req.params.id);
         if(estadoLibro.length === 0)throw new Error('ese libro esta prestado no se puede borrar');
