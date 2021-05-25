@@ -7,7 +7,7 @@ class Libro{
         const respuesta = qy(query,[id]);
         return respuesta
     }
-    static exite(id){
+    static existe(id){
         const query = 'SELECT * FROM libro WHERE libro_id =?';
         const respuesta = qy(query,[id]);
         return respuesta
