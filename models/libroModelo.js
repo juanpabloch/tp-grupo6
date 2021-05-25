@@ -13,7 +13,7 @@ class Libro{
         return respuesta
     }
     static eliminar(id){
-        const query = 'DELETE FROM `libro` WHERE libro_id=?';
+        const query = 'DELETE FROM libro WHERE libro_id=?';
         const respuesta = qy(query,[id]);
         return respuesta
     }
