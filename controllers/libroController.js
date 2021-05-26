@@ -1,6 +1,4 @@
 const Modelo = require("../models/libroModelo");
-const ModeloCate = require("../models/categoriaModelo");
-const ModeloPerson = require("../models/categoriaModelo");
 
 const libro_descripcion = async (req, res, next) => {
   try {
