@@ -22,7 +22,7 @@ class Libro {
     let respuesta = qy(query, [id]);
     return respuesta;
   }
-  static existe_plus(nombre, persona, categoria, id) {
+  static verificar(nombre, persona, categoria, id) {
     if (persona === null) {
       let query =
         "SELECT * FROM libro WHERE nombre = ?   AND persona_id  IS NULL  AND categoria_id  = ? AND libro_id  = ?  ";
