@@ -5,7 +5,7 @@ const libro_descripcion = async (req, res, next) => {
     if (!req.body.nombre || !req.body.categoria_id) {
       throw new Error("No enviaste los datos obligatorios");
     }
-    let respuesta = await Modelo.existe_plus(
+    let respuesta = await Modelo.verificar(
       req.body.nombre.toUpperCase(),
       req.body.persona,
       req.body.categoria_id,
@@ -16,7 +16,7 @@ const libro_descripcion = async (req, res, next) => {
     }
     let descripcion = "";
     if (req.body.descripcion) {
-      descripcion = req.body.descripcion;
+      descripcion = req.body.descripcion.toUpperCase();
     }
     respuesta = await Modelo.cambio_descripcion(
       req.body.nombre,
