@@ -4,14 +4,12 @@ const app = express();
 
 const router = require('./routes');
 
-const morgan = require('morgan')
 //set port
 const port = process.env.PORT || 3000;
 
 
 //middlewares
 app.use(express.json());
-app.use(morgan('dev'));
 
 //routes
 app.use(router);

@@ -6,7 +6,11 @@ const router = express.Router();
 
 
 //importamos controlador
-const controlador = require('../controllers/libroController')
+const controlador = require('../controllers/libroController');
+
+//importamos las validaciones
+const validacion = require('../validaciones/validaciones');
+
 
 router.get('/',(req,res)=>{
     res.send('Bienvenidos al Home');

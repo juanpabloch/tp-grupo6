@@ -20,7 +20,7 @@ const Modelo = require('../models/categoriaModelo');
 
 const categoria_lista = async(req, res, next)=>{
     try {   
-        const respuesta = await Modulo.lista();
+        const respuesta = await Modelo.lista();
         if(respuesta.length === 0)throw new Error('no hay categorias para mostrar');
         res.status(200).json(respuesta);
     } catch (err) {
