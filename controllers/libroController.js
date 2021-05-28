@@ -7,7 +7,7 @@ const libro_descripcion = async (req, res, next) => {
     }
     let respuesta = await Modelo.verificar(
       req.body.nombre.toUpperCase(),
-      req.body.persona,
+      req.body.persona_id,
       req.body.categoria_id,
       req.params.id
     );
@@ -21,11 +21,12 @@ const libro_descripcion = async (req, res, next) => {
     respuesta = await Modelo.cambio_descripcion(
       req.body.nombre,
       descripcion,
-      req.body.persona,
+      req.body.persona_id,
       req.body.categoria_id,
       req.params.id
     );
-    res.status(200).json("se realizo el cambio de descripcion correctamente");
+    const modificado = req.body;
+    res.status(200).json({modificado});
   } catch (err) {
     if (err.code === undefined) {
       res.status(413).json({
