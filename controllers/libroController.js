@@ -2,24 +2,25 @@ const {  libro ,persona ,categoria  } = require("../models");
 
 const cambiar_descripcion = async (req, res, next) => {
   try {
+    const {nombre,persona_id,categoria_id,descripcion} = req.body;
     let respuesta = await libro.verificar(
-      req.body.nombre.toUpperCase(),
-      req.body.persona_id,
-      req.body.categoria_id,
+      nombre.toUpperCase(),
+     persona_id,
+      categoria_id,
       req.params.id
     );
     if (respuesta.length === 0) {
       throw new Error("Solo puedes cambiar la descripcion");
     }
-    let descripcion = "";
-    if (req.body.descripcion) {
-      descripcion = req.body.descripcion.toUpperCase();
+    let descripcion_aux = "";
+    if (descripcion) {
+      descripcion_aux = descripcion.toUpperCase();
     }
     respuesta = await libro.modificar(
-      req.body.nombre,
-      descripcion,
-      req.body.persona_id,
-      req.body.categoria_id,
+      nombre,
+      descripcion_aux,
+      persona_id,
+      categoria_id,
       req.params.id
     );
     const modificado = req.body;

@@ -1,3 +1,3 @@
-exports.libroControl = require('./libroController');
-exports.personaControl = require('./personaController');
-exports.categoriaControl = require('./categoriaController');
+exports.librosControl = require('./libroController');
+exports.personasControl = require('./personaController');
+exports.categoriasControl = require('./categoriaController');
