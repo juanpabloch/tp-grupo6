@@ -11,12 +11,16 @@ const {  librosCtrl  ,personasCtrl   ,categoriasCtrl   } = require("../controlle
 const { validar } = require('../middleware');
 
 
-router.get("/", (req, res) => {
-  res.send("Bienvenidos al Home").status(200);
-});
 
-router.delete("/:id", librosCtrl.borrar);
-router.put("/devolver/:id", librosCtrl.devolver);
-router.put("/:id", librosCtrl.cambiar_descripcion);
+router.post('/', validar.agregarLibro, librosCtrl.agregar);
+
+router.put("/devolver/:id", validar.idCorrecto, librosCtrl.devolver);
+
+router.put("/:id", validar.idCorrecto, librosCtrl.cambiar_descripcion);
+
+router.get('/:id', validar.idCorrecto, librosCtrl.detalle);
+
+router.delete("/:id", validar.idCorrecto, librosCtrl.borrar);
+
 
 module.exports = router;

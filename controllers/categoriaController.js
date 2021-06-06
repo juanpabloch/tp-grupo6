@@ -16,11 +16,11 @@
 //     }
 // }
 
-const Modelo = require('../models/categoriaModelo');
+const {  libro, persona, categoria  } = require("../models");
 
-const categoria_lista = async(req, res, next)=>{
+const lista = async(req, res, next)=>{
     try {   
-        const respuesta = await Modelo.lista();
+        const respuesta = await categoria.lista();
         if(respuesta.length === 0)throw new Error('no hay categorias para mostrar');
         res.status(200).json(respuesta);
     } catch (err) {
@@ -34,6 +34,36 @@ const categoria_lista = async(req, res, next)=>{
     }
 }
 
+
+const eliminar = async(req, res, next)=>{
+    try {
+        const { id } = req.params;
+        let query = 'SELECT nombre FROM categoria WHERE categoria_id = ?';
+        let respuesta = await qy(query, [id]);
+        if(respuesta.length === 0)throw new Error('no existe la categoria indicada');
+
+        
+        respuesta = await categoria.categoriaLibro(id);
+        if(respuesta.length > 0)throw new Error('categoria con libros asociados, no se puede eliminar') 
+
+        respuesta = await categoria.eliminar(id);
+
+        res.status(200).json({
+            mensaje: 'se borro correctamente'
+        });
+
+    } catch (err) {
+        if(err.code === undefined){
+            res.status(413).json({
+                error: err.message
+            })
+        }else{
+            next(err)
+        }
+    }
+}
+
 module.exports = {
-    categoria_lista
+    lista,
+    eliminar
 }

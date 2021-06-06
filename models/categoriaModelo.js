@@ -26,6 +26,18 @@ class Categoria{
         return respuesta
     }
 
+    static eliminar(id){
+        const query = 'DELETE FROM categoria WHERE categoria_id = ?';
+        const respuesta = qy(query, [id]);
+        return respuesta
+    };
+
+    static categoriaLibro(id){
+        const query = 'SELECT categoria_id FROM libro WHERE categoria_id = ?';
+        const respuesta = qy(query, [id]);
+        return respuesta
+    }
+
 }
 
 module.exports = Categoria

@@ -1,1 +1,1 @@
-exports.validar  = require('./validaciones');
+module.exports.validar  = require('./validaciones');

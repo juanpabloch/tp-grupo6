@@ -82,8 +82,31 @@ function validarPersona(datos){
     }
 }
 
+//validaciones libro
 
+const agregarLibro = (req, res, next)=>{
+    try {
+        if( !req.body.nombre || !req.body.categoria_id ) throw new Error('nombre y categoría son datos obligatorios');
+
+        let { nombre, descripcion } = req.body
+    
+        if( nombre.length <= 3 ) throw new Error('el nombre debe tener mas de 3 caracteres');
+        
+        if( descripcion.length > 200 ) throw new Error('la descripción no debe tener mas de 200 caracteres');
+        
+        next()
+        
+    } catch (err) {
+        if(err){
+            res.status(413).json({
+                error: err.message
+            })
+        }
+    }
+}
 
 module.exports = {
-    idCorrecto, validarPersona
+    idCorrecto, 
+    validarPersona,
+    agregarLibro
 }

@@ -11,6 +11,7 @@ const {  librosCtrl  ,personasCtrl   ,categoriasCtrl   } = require("../controlle
  const { validar } = require('../middleware');
 
 
-router.get('/', categoriasCtrl.categoria_lista);
+router.get('/', categoriasCtrl.lista);
+router.delete('/:id', validar.idCorrecto ,categoriasCtrl.eliminar);
 
 module.exports = router;

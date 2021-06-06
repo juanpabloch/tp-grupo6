@@ -1,11 +1,11 @@
 const qy = require('../dataBase/mysqlConnect');
 
 
-const {  libro ,persona ,categoria  } = require("../models");
+const {  libro, persona, categoria  } = require("../models");
 
 const { validar } = require('../middleware');
 
-const persona_lista = async(req, res, next)=>{
+const lista = async(req, res, next)=>{
     try {   
         const respuesta = await persona.lista();
         if(respuesta.length === 0)throw new Error('no hay personas para mostrar');
@@ -22,7 +22,7 @@ const persona_lista = async(req, res, next)=>{
     }
 }
 
-const persona_buscar = async(req,res,next)=>{
+const buscar = async(req,res,next)=>{
     try {
         const respuesta = await persona.busca_id(req.params.id);
         res.status(200).json(respuesta);
@@ -37,7 +37,7 @@ const persona_buscar = async(req,res,next)=>{
     }
 }
 
-const persona_registro = async(req,res,next)=>{
+const registro = async(req,res,next)=>{
     try{
         validar.validarPersona(req.body);
 
@@ -62,6 +62,8 @@ const persona_registro = async(req,res,next)=>{
 
 
 module.exports = {
-    persona_lista, persona_registro, persona_buscar
+    lista, 
+    registro, 
+    buscar
 }
 

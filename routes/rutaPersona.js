@@ -13,9 +13,9 @@ const { validar } = require('../middleware');
 //rutas a crear
 // get('/') - get('/:id') - delete('/:id') - post('/') - put('/:id')
 
-router.get('/', personasCtrl.persona_lista);
-router.get("/:id",personasCtrl.persona_buscar);
-router.post('/',personasCtrl.persona_registro);
+router.get('/', personasCtrl.lista);
+router.get("/:id",personasCtrl.buscar);
+router.post('/',personasCtrl.registro);
 
 
 
