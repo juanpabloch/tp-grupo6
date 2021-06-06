@@ -1,5 +1,5 @@
 const {  libro, persona, categoria  } = require("../models");
-
+const qy = require("../dataBase/mysqlConnect");
 const cambiar_descripcion = async (req, res, next) => {
   try {
     const {nombre,persona_id,categoria_id,descripcion} = req.body;
@@ -60,7 +60,7 @@ const borrar = async (req, res, next) => {
     respuesta = await libro.estado(req.params.id);
     if (respuesta.length === 0)
       throw new Error("ese libro esta prestado no se puede borrar");
-    respuesta = await Modelo.eliminar(req.params.id);
+    respuesta = await libro.eliminar(req.params.id);
     res.status(200).json("Se borro perfectamente el libro");
   } catch (err) {
     if (err.code === undefined) {
