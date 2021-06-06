@@ -16,7 +16,7 @@ router.post('/', validar.agregarLibro, librosCtrl.agregar);
 
 router.put("/devolver/:id", validar.idCorrecto, librosCtrl.devolver);
 
-router.put("/:id", validar.idCorrecto, librosCtrl.cambiar_descripcion);
+router.put("/:id", validar.idCorrecto,validar.agregarLibro, librosCtrl.cambiar_descripcion);
 
 router.get('/:id', validar.idCorrecto, librosCtrl.detalle);
 
