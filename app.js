@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-const { errores } = require('./middleware');
+const { errores , validar } = require('./middleware');
 const router = require('./routes');
 
 //set port
@@ -12,8 +12,8 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 //routes
 app.use(router);
-
-app.use(errores);
+app.use(errores.is404);
+app.use(errores.is500);
 
 app.listen(port, () => {
   console.log(`server listening on port: ${port}`);
