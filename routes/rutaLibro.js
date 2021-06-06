@@ -5,7 +5,7 @@ const router = express.Router();
 //get('/') - get('/:id') - delete('/:id') - post('/') - put('/:id') - put('/prestar/:id') - put('/devolver/:id')
 
 //importamos controlador
-const {  librosControl ,personasControl  ,categoriasControl   } = require("../controllers");
+const {  librosCtrl  ,personasCtrl   ,categoriasCtrl   } = require("../controllers");
 
 //importamos las validaciones
 const validacion = require('../validaciones/validaciones');
@@ -15,8 +15,8 @@ router.get("/", (req, res) => {
   res.send("Bienvenidos al Home").status(200);
 });
 
-router.delete("/:id", librosControl.borrar);
-router.put("/devolver/:id", librosControl.devolver);
-router.put("/:id", librosControl.cambiar_descripcion);
+router.delete("/:id", librosCtrl.borrar);
+router.put("/devolver/:id", librosCtrl.devolver);
+router.put("/:id", librosCtrl.cambiar_descripcion);
 
 module.exports = router;

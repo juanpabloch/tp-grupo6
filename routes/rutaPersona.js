@@ -5,7 +5,7 @@ const router = express.Router();
 // get('/') - get('/:id') - delete('/:id') - post('/') - put('/:id')
 
 //importamos controlador
-const {  librosControl ,personasControl  ,categoriasControl   } = require("../controllers");
+const {  librosCtrl  ,personasCtrl   ,categoriasCtrl   } = require("../controllers");
 
 //importamos las validaciones
 const validacion = require('../validaciones/validaciones');
@@ -13,9 +13,9 @@ const validacion = require('../validaciones/validaciones');
 //rutas a crear
 // get('/') - get('/:id') - delete('/:id') - post('/') - put('/:id')
 
-router.get('/', personasControl.persona_lista);
-router.get("/:id",personasControl.persona_buscar);
-router.post('/',personasControl.persona_registro);
+router.get('/', personasCtrl.persona_lista);
+router.get("/:id",personasCtrl.persona_buscar);
+router.post('/',personasCtrl.persona_registro);
 
 
 
