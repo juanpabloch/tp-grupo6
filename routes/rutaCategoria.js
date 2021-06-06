@@ -8,7 +8,7 @@ const router = express.Router();
 //importamos controlador
 const {  librosCtrl  ,personasCtrl   ,categoriasCtrl   } = require("../controllers");
 //importamos las validaciones
-const validacion = require('../validaciones/validaciones');
+ const { validar } = require('../middleware');
 
 
 router.get('/', categoriasCtrl.categoria_lista);

@@ -1,8 +1,9 @@
 const qy = require('../dataBase/mysqlConnect');
 
+
 const {  libro ,persona ,categoria  } = require("../models");
 
-const validacion = require('../validaciones/validaciones');
+const { validar } = require('../middleware');
 
 const persona_lista = async(req, res, next)=>{
     try {   
@@ -38,7 +39,7 @@ const persona_buscar = async(req,res,next)=>{
 
 const persona_registro = async(req,res,next)=>{
     try{
-        validaciones.validarPersona(req.body);
+        validar.validarPersona(req.body);
 
         let respuesta = await persona.existe(req.body);
         if (respuesta.length > 0){

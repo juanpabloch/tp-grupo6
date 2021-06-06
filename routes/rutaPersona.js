@@ -8,7 +8,7 @@ const router = express.Router();
 const {  librosCtrl  ,personasCtrl   ,categoriasCtrl   } = require("../controllers");
 
 //importamos las validaciones
-const validacion = require('../validaciones/validaciones');
+const { validar } = require('../middleware');
 
 //rutas a crear
 // get('/') - get('/:id') - delete('/:id') - post('/') - put('/:id')
