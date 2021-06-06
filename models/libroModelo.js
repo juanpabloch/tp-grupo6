@@ -35,7 +35,7 @@ class Libro {
       return respuesta;
     }
   }
-  static cambio_descripcion(nombre, descripcion, persona, categoria, id) {
+  static modificar(nombre, descripcion, persona, categoria, id) {
     const query =
       "UPDATE libro SET nombre = ?, descripcion = ?,persona_id  = ?, categoria_id = ? WHERE libro_id = ?";
     let respuesta = qy(query, [nombre, descripcion, persona, categoria, id]);

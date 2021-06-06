@@ -6,11 +6,11 @@ const router = express.Router();
 
 
 //importamos controlador
-const controlador = require('../controllers/categoriaController')
+const {  libroControl ,personaControl  ,categoriaControl   } = require("../controllers");
 //importamos las validaciones
 const validacion = require('../validaciones/validaciones');
 
 
-router.get('/', controlador.categoria_lista);
+router.get('/', categoriaControl.categoria_lista);
 
 module.exports = router;
