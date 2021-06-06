@@ -1,1 +1,3 @@
-module.exports.validar  = require('./validaciones');
+exports.validar  = require('./validaciones');
+exports.errores  = require('./errores');
+
