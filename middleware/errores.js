@@ -1,13 +1,10 @@
 exports.is500 = (error, req, res, next) => {
   res.status(error.status || 500);
-  res.statusCode === 404
+  res.statusCode === 404 || res.statusCode === 413 
     ? res.json({
         mensaje: error.message,
       })
-    : (res.statusCode === 413) ? res.json({
-        mensaje: error.message,
-      })
-      : res.json({
+    : res.json({
         mensaje: "error inesperado",
       })
 };
