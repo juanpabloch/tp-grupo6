@@ -108,6 +108,7 @@ const agregar = async(req, res, next)=>{
       let respuesta = await libro.existeNombre(nombre.toUpperCase())
       if(respuesta.length)throw new Error('ese libro ya existe');
 
+      //Placeholder, esperando codigo de categorias y persona.
       query = 'SELECT * FROM categoria WHERE categoria_id = ?'
       respuesta = await qy(query, [categoria_id])
       if(respuesta.length === 0)throw new Error('no existe la categoria indicada');
