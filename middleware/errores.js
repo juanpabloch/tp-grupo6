@@ -10,7 +10,7 @@ exports.is500 = (error, req, res, next) => {
 };
 
 exports.is404 = (req, res, next) => {
-  const error = new Error("No exite esa ruta");
+  const error = new Error("Ooops...  La pagina que busca no existe.");
   error.status = 404;
   next(error);
 };
