@@ -12,15 +12,15 @@ const { validar } = require('../middleware');
 
 
 
-router.post('/', validar.agregarLibro, librosCtrl.agregar);
+router.post('/', validar.bodyLibro, librosCtrl.agregar);
 
-router.put("/devolver/:id", validar.idCorrecto, librosCtrl.devolver);
+router.put("/devolver/:id", validar.params, librosCtrl.devolver);
 
-router.put("/:id", validar.idCorrecto,validar.agregarLibro, librosCtrl.cambiar_descripcion);
+router.put("/:id", validar.params,validar.bodyLibro, librosCtrl.cambiar_descripcion);
 
-router.get('/:id', validar.idCorrecto, librosCtrl.detalle);
+router.get('/:id', validar.params, librosCtrl.detalle);
 
-router.delete("/:id", validar.idCorrecto, librosCtrl.borrar);
+router.delete("/:id", validar.params, librosCtrl.borrar);
 
 
 module.exports = router;

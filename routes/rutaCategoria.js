@@ -12,6 +12,6 @@ const {  librosCtrl  ,personasCtrl   ,categoriasCtrl   } = require("../controlle
 
 
 router.get('/', categoriasCtrl.lista);
-router.delete('/:id', validar.idCorrecto ,categoriasCtrl.eliminar);
+router.delete('/:id', validar.params ,categoriasCtrl.eliminar);
 
 module.exports = router;

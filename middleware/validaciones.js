@@ -22,7 +22,7 @@
 
 //por ultimo exportamos la funcion
 
-const idCorrecto = (req, res, next)=>{
+const params = (req, res, next)=>{
     const { id } = req.params;
     if(Number(id)){
         console.log('id correcto');
@@ -43,7 +43,7 @@ function validarPersona(datos){
     if (!nombre || !apellido || !alias || !email){
         throw new Error ('Falta enviar datos')
     }
-
+    
     if (typeof nombre !== 'string'){
         throw new Error ('el nombre debe ser un String');
     }
@@ -84,7 +84,7 @@ function validarPersona(datos){
 
 //validaciones libro
 
-const agregarLibro = (req, res, next)=>{
+const bodyLibro = (req, res, next)=>{
     try {
         if( !req.body.nombre || !req.body.categoria_id ) throw new Error('nombre y categoría son datos obligatorios');
 
@@ -106,7 +106,7 @@ const agregarLibro = (req, res, next)=>{
 }
 
 module.exports = {
-    idCorrecto, 
+    params, 
     validarPersona,
-    agregarLibro
+    bodyLibro
 }
