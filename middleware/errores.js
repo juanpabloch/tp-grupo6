@@ -1,6 +1,5 @@
 exports.is500 = (error, req, res, next) => {
   res.status(error.status || 500);
-  console.log(res.statusCode+error.message)
   res.statusCode === 404
     ? res.json({
         mensaje: error.message,
