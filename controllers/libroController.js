@@ -61,7 +61,7 @@ const borrar = async (req, res, next) => {
     if (respuesta.length === 0)
       throw new Error("ese libro esta prestado no se puede borrar");
     respuesta = await libro.eliminar(req.params.id);
-    res.status(200).json("Se borro perfectamente el libro");
+    res.status(200).json("se borro correctamente");
   } catch (err) {
     if (err.code === undefined) {
       res.status(413).json({
@@ -76,9 +76,6 @@ const borrar = async (req, res, next) => {
 const detalle = async(req, res, next)=>{
   try {
       const { id } = req.params;
-      
-      if(!Number(id))throw new Error('id no valido')
-      
       const respuesta = await libro.existe(id);
       if(respuesta.length === 0)throw new Error('no se encuentra ese libro');
 
