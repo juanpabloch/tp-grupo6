@@ -76,9 +76,6 @@ const borrar = async (req, res, next) => {
 const detalle = async(req, res, next)=>{
   try {
       const { id } = req.params;
-      
-      if(!Number(id))throw new Error('id no valido')
-      
       const respuesta = await libro.existe(id);
       if(respuesta.length === 0)throw new Error('no se encuentra ese libro');
 
