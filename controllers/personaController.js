@@ -40,7 +40,7 @@ const buscar = async(req,res,next)=>{
 const registro = async(req,res,next)=>{
     try{
         validar.validarPersona(req.body);
-        let respuesta = await persona.existe(req.body.mail);
+        let respuesta = await persona.existe(req.body.email);
         if (respuesta.length > 0){
             throw new Error('La persona ya existe');
         }
