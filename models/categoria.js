@@ -20,21 +20,21 @@ const qy = require('../dataBase/mysqlConnect');
 
 class Categoria{
 
-    static lista(){
+    static async lista(){
         const query = 'SELECT * FROM categoria';
-        const respuesta = qy(query);
+        const respuesta = await qy(query);
         return respuesta
     }
 
-    static eliminar(id){
+    static async eliminar(id){
         const query = 'DELETE FROM categoria WHERE categoria_id = ?';
-        const respuesta = qy(query, [id]);
+        const respuesta = await qy(query, [id]);
         return respuesta
     };
 
-    static categoriaLibro(id){
+    static async categoriaLibro(id){
         const query = 'SELECT categoria_id FROM libro WHERE categoria_id = ?';
-        const respuesta = qy(query, [id]);
+        const respuesta = await qy(query, [id]);
         return respuesta
     }
 
