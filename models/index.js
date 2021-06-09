@@ -1,3 +1,3 @@
-exports.libro = require('./libroModelo');
-exports.persona = require('./personaModelo');
-exports.categoria = require('./categoriaModelo');
+exports.libro = require('./libro');
+exports.persona = require('./persona');
+exports.categoria = require('./categoria');
