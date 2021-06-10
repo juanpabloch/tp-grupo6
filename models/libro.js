@@ -9,7 +9,7 @@ class Libro {
     return respuesta;
   };
 
-  static async existe(id) {
+  static async buscar(id) {
     const query = "SELECT * FROM libro WHERE libro_id = ?";
     let respuesta = await qy(query, [id]);
     return respuesta;

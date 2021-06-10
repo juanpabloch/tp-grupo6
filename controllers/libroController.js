@@ -1,8 +1,8 @@
-const {  libro, persona, categoria  } = require("../models");
+const { libro, persona, categoria } = require("../models");
 const qy = require("../dataBase/mysqlConnect");
 const cambiar_descripcion = async (req, res, next) => {
   try {
-    const {nombre,persona_id,categoria_id,descripcion} = req.body;
+    const { nombre, persona_id, categoria_id, descripcion } = req.body;
     let respuesta = await libro.verificar(
       nombre.toUpperCase(),
       persona_id,
@@ -23,7 +23,7 @@ const cambiar_descripcion = async (req, res, next) => {
       categoria_id,
       req.params.id
     );
-    respuesta = await libro.existe(req.params.id);
+    respuesta = await libro.buscar(req.params.id);
     res.status(200).json(respuesta);
   } catch (err) {
     if (err.code === undefined) {
@@ -37,7 +37,7 @@ const cambiar_descripcion = async (req, res, next) => {
 };
 const devolver = async (req, res, next) => {
   try {
-    let respuesta = await libro.existe(req.params.id);
+    let respuesta = await libro.buscar(req.params.id);
     if (respuesta.length === 0) throw new Error("no se encuentra ese libro");
     respuesta = await libro.estado(req.params.id);
     if (respuesta.length > 0) throw new Error("ese libro no estaba prestado!");
@@ -55,7 +55,7 @@ const devolver = async (req, res, next) => {
 };
 const borrar = async (req, res, next) => {
   try {
-    let respuesta = await libro.existe(req.params.id);
+    let respuesta = await libro.buscar(req.params.id);
     if (respuesta.length === 0) throw new Error("no se encuentra ese libro");
     respuesta = await libro.estado(req.params.id);
     if (respuesta.length === 0)
@@ -73,75 +73,78 @@ const borrar = async (req, res, next) => {
   }
 };
 
-const detalle = async(req, res, next)=>{
+const detalle = async (req, res, next) => {
   try {
-      const { id } = req.params;
-      const respuesta = await libro.existe(id);
-      if(respuesta.length === 0)throw new Error('no se encuentra ese libro');
+    const { id } = req.params;
+    const respuesta = await libro.existe(id);
+    if (respuesta.length === 0) throw new Error("no se encuentra ese libro");
 
-      res.status(200).json(respuesta);
-
+    res.status(200).json(respuesta);
   } catch (err) {
-      if(err.code === undefined){
-          res.status(413).json({
-              error: err.message
-          })
-      }else{
-          res.status(err.status || 500).json({
-              error: 'error inesperado'
-          })
-      }
+    if (err.code === undefined) {
+      res.status(413).json({
+        error: err.message,
+      });
+    } else {
+      res.status(err.status || 500).json({
+        error: "error inesperado",
+      });
+    }
   }
 };
 
-const agregar = async(req, res, next)=>{
+const agregar = async (req, res, next) => {
   try {
-      let { nombre, descripcion, categoria_id, persona_id } = req.body
-      
-      if(persona_id === ""){
-          persona_id = null;
-      }
-      
-      let respuesta = await libro.existeNombre(nombre.toUpperCase())
-      if(respuesta.length)throw new Error('ese libro ya existe');
+    let { nombre, descripcion, categoria_id, persona_id } = req.body;
 
-      //Placeholder, esperando codigo de categorias y persona.
-      query = 'SELECT * FROM categoria WHERE categoria_id = ?'
-      respuesta = await qy(query, [categoria_id])
-      if(respuesta.length === 0)throw new Error('no existe la categoria indicada');
+    if (persona_id === "") {
+      persona_id = null;
+    }
 
-      if(persona_id){
-          query = 'SELECT * FROM persona WHERE persona_id = ?'
-          respuesta = await qy(query, [persona_id])
-          if(respuesta.length === 0)throw new Error('no existe la persona indicada');
-      }
+    let respuesta = await libro.existeNombre(nombre.toUpperCase());
+    if (respuesta.length) throw new Error("ese libro ya existe");
 
-      
-      respuesta = await libro.agregar(nombre.toUpperCase(), descripcion.toUpperCase(), categoria_id, persona_id);
-      
-      const id =  respuesta.insertId;
-      respuesta = await libro.existe(id);
+    //Placeholder, esperando codigo de categorias y persona.
+    query = "SELECT * FROM categoria WHERE categoria_id = ?";
+    respuesta = await qy(query, [categoria_id]);
+    if (respuesta.length === 0)
+      throw new Error("no existe la categoria indicada");
 
-      res.status(200).json(respuesta);
+    if (persona_id) {
+      query = "SELECT * FROM persona WHERE persona_id = ?";
+      respuesta = await qy(query, [persona_id]);
+      if (respuesta.length === 0)
+        throw new Error("no existe la persona indicada");
+    }
 
+    respuesta = await libro.agregar(
+      nombre.toUpperCase(),
+      descripcion.toUpperCase(),
+      categoria_id,
+      persona_id
+    );
+
+    const id = respuesta.insertId;
+    respuesta = await libro.existe(id);
+
+    res.status(200).json(respuesta);
   } catch (err) {
-      if(err.code === undefined){
-          res.status(413).json({
-              error: err.message
-          })
-      }else{
-          res.status(err.status || 500).json({
-              error: 'error inesperado'
-          })
-      }
+    if (err.code === undefined) {
+      res.status(413).json({
+        error: err.message,
+      });
+    } else {
+      res.status(err.status || 500).json({
+        error: "error inesperado",
+      });
+    }
   }
 };
-
 
 module.exports = {
   borrar,
   devolver,
   cambiar_descripcion,
   detalle,
-  agregar
-}
+  agregar,
+};
