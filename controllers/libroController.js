@@ -76,7 +76,7 @@ const borrar = async (req, res, next) => {
 const detalle = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const respuesta = await libro.existe(id);
+    const respuesta = await libro.buscar(id);
     if (respuesta.length === 0) throw new Error("no se encuentra ese libro");
 
     res.status(200).json(respuesta);
@@ -125,7 +125,7 @@ const agregar = async (req, res, next) => {
     );
 
     const id = respuesta.insertId;
-    respuesta = await libro.existe(id);
+    respuesta = await libro.buscar(id);
 
     res.status(200).json(respuesta);
   } catch (err) {
