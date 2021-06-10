@@ -23,8 +23,8 @@ const cambiar_descripcion = async (req, res, next) => {
       categoria_id,
       req.params.id
     );
-    const modificado = req.body;
-    res.status(200).json({modificado});
+    respuesta = await libro.existe(req.params.id);
+    res.status(200).json(respuesta);
   } catch (err) {
     if (err.code === undefined) {
       res.status(413).json({
