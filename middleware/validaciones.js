@@ -88,9 +88,16 @@ const bodyLibro = (req, res, next)=>{
     try {
         if( !req.body.nombre || !req.body.categoria_id ) throw new Error('nombre y categoría son datos obligatorios');
 
-        let { nombre, descripcion } = req.body
-    
-        if( nombre.length <= 3 ) throw new Error('el nombre debe tener mas de 3 caracteres');
+        let { nombre, descripcion } = req.body;
+
+        nombre = nombre.replace(/  +/ig,' ');
+        nombre = nombre.trim();
+        req.body.nombre  = nombre.match(/^([a-zA-Z]{3,}\s?[a-zA-Z]{1,}\s?([a-zA-Z]{1,})?)/ig);
+        
+        if( nombre === null ) throw new Error('el nombre debe tener mas de 3 caracteres');
+        
+        descripcion = descripcion.trim();
+        req.body.descripcion = descripcion.replace(/  +/ig,' ');
         
         if( descripcion.length > 200 ) throw new Error('la descripción no debe tener mas de 200 caracteres');
         

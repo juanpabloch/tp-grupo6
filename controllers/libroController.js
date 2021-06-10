@@ -26,14 +26,8 @@ const cambiar_descripcion = async (req, res, next) => {
     respuesta = await libro.buscar(req.params.id);
     res.status(200).json(respuesta);
   } catch (err) {
-    if (err.code === undefined) {
-      res.status(413).json({
-        error: err.message,
-      });
-    } else {
       next(err);
     }
-  }
 };
 const devolver = async (req, res, next) => {
   try {
@@ -43,14 +37,8 @@ const devolver = async (req, res, next) => {
     if (respuesta.length > 0) throw new Error("ese libro no estaba prestado!");
     respuesta = await libro.devolver(req.params.id);
     res.status(200).json("se realizo la devolución correctamente");
-  } catch (err) {
-    if (err.code === undefined) {
-      res.status(413).json({
-        error: err.message,
-      });
-    } else {
-      next(err);
-    }
+  }  catch (err) {
+    next(err);
   }
 };
 const borrar = async (req, res, next) => {
@@ -63,13 +51,7 @@ const borrar = async (req, res, next) => {
     respuesta = await libro.eliminar(req.params.id);
     res.status(200).json("se borro correctamente");
   } catch (err) {
-    if (err.code === undefined) {
-      res.status(413).json({
-        error: err.message,
-      });
-    } else {
-      next(err);
-    }
+    next(err);
   }
 };
 
@@ -81,15 +63,7 @@ const detalle = async (req, res, next) => {
 
     res.status(200).json(respuesta);
   } catch (err) {
-    if (err.code === undefined) {
-      res.status(413).json({
-        error: err.message,
-      });
-    } else {
-      res.status(err.status || 500).json({
-        error: "error inesperado",
-      });
-    }
+    next(err);
   }
 };
 
@@ -101,7 +75,7 @@ const agregar = async (req, res, next) => {
       persona_id = null;
     }
 
-    let respuesta = await libro.existeNombre(nombre.toUpperCase());
+    let respuesta = await libro.existeNombre(nombre);
     if (respuesta.length) throw new Error("ese libro ya existe");
 
     //Placeholder, esperando codigo de categorias y persona.
@@ -118,26 +92,18 @@ const agregar = async (req, res, next) => {
     }
 
     respuesta = await libro.agregar(
-      nombre.toUpperCase(),
-      descripcion.toUpperCase(),
+      nombre,
+      descripcion,
       categoria_id,
       persona_id
     );
-
+      console.log('entro a agregar');
     const id = respuesta.insertId;
     respuesta = await libro.buscar(id);
 
     res.status(200).json(respuesta);
   } catch (err) {
-    if (err.code === undefined) {
-      res.status(413).json({
-        error: err.message,
-      });
-    } else {
-      res.status(err.status || 500).json({
-        error: "error inesperado",
-      });
-    }
+    next(err);
   }
 };
 
