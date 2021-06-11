@@ -10,7 +10,7 @@ const {  librosCtrl, personasCtrl, categoriasCtrl   } = require("../controllers"
 //importamos las validaciones
 const { validar } = require('../middleware');
 
-router.get('/', librosCtrl.todosl);
+router.get('/', librosCtrl.todos);
 
 router.post('/', validar.bodyLibro, librosCtrl.agregar);
 

@@ -47,13 +47,13 @@ const devolver = async (req, res, next) => {
 const prestar = async (req, res, next) => {
   try {
     //no funciona el error cuando los parametros no se envian
-    let respuesta = await libro.existe(req.params.id);
+    let respuesta = await libro.buscar(req.params.id);
     if (respuesta.length === 0) throw new Error("No se encuentra el libro");
     respuesta = await libro.estado(req.params.id);
     if (respuesta.length === 0) throw new Error('El libro con id: ' +req.params.id + ' ya se encuentra prestado, no se puede prestar hasta que no se devuelva');
     respuesta = await persona.busca_id(req.body.persona_id);
     if (respuesta.length === 0) throw new Error('No se encontro la persona con id:' + req.body.persona_id + ' a la que se le quiere prestar el libro');
-    respuesta = await libro.prestarl(req.body.persona_id, req.params.id);
+    respuesta = await libro.prestar(req.body.persona_id, req.params.id);
     res.status(200).json("El libro se presto correctamente");
   } catch (err) {
         next(err);
@@ -75,7 +75,7 @@ const borrar = async (req, res, next) => {
 };
 
 //Consultar todos los libros
-const todosl = async(req, res, next)=>{
+const todos = async(req, res, next)=>{
   try {
       const respuesta = await libro.listalibros();
       if (respuesta.length === 0) throw new Error('No tenemos ningun libro en la biblioteca');
@@ -143,7 +143,7 @@ module.exports = {
   devolver,
   prestar,
   borrar,
-  todosl,
+  todos,
   detalle,
   agregar,
 };

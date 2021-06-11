@@ -16,12 +16,6 @@ class Libro {
     return respuesta;
   };
 
-  static async existe(id) {
-    const query = "SELECT * FROM libro WHERE libro_id = ?";
-    let respuesta = await qy(query, [id]);
-    return respuesta;
-  };
-
   static async buscar(id) {
     const query = "SELECT * FROM libro WHERE libro_id = ?";
     let respuesta = await qy(query, [id]);
@@ -35,9 +29,8 @@ class Libro {
   };
 
   //prestar un libro
-  static async prestarl(id,libro) {
+  static async prestar(id,libro) {
     const query = 'UPDATE libro SET persona_id = ? WHERE libro_id = ? AND persona_id IS NULL';
-    console.log("paso por el update" )
     let respuesta = await qy(query, [id,libro]);
     return respuesta;
   };
