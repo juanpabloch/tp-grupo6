@@ -9,7 +9,7 @@ class Libro {
     return respuesta;
   };
 
-  static async listalibros() {
+  static async lista() {
     const query =
       "SELECT * FROM libro";
     let respuesta = await qy(query);
@@ -68,7 +68,7 @@ class Libro {
     return respuesta;
   };
 
-  static async existeNombre(nombre){
+  static async buscarNombre(nombre){
       let query = 'SELECT nombre FROM libro WHERE nombre = ?'
       let respuesta = await qy(query, [nombre])
       return respuesta

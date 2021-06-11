@@ -24,13 +24,7 @@ const lista = async(req, res, next)=>{
         if(respuesta.length === 0)throw new Error('no hay categorias para mostrar');
         res.status(200).json(respuesta);
     } catch (err) {
-        if(err.code === undefined){
-            res.status(413).json({
-                error: err.message
-            })
-        }else{
-            next(err);
-        }
+        next(err);
     }
 }
 
@@ -43,7 +37,7 @@ const eliminar = async(req, res, next)=>{
         if(respuesta.length === 0)throw new Error('no existe la categoria indicada');
 
         
-        respuesta = await categoria.categoriaLibro(id);
+        respuesta = await categoria.buscarCategoriaLibro(id);
         if(respuesta.length > 0)throw new Error('categoria con libros asociados, no se puede eliminar') 
 
         respuesta = await categoria.eliminar(id);
@@ -53,13 +47,7 @@ const eliminar = async(req, res, next)=>{
         });
 
     } catch (err) {
-        if(err.code === undefined){
-            res.status(413).json({
-                error: err.message
-            })
-        }else{
-            next(err)
-        }
+        next(err);
     }
 }
 

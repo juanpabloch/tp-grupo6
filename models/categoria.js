@@ -16,6 +16,14 @@ module.exports = categoria;
 */
 //crear: lista, detalles, eliminar, nueva
 
+Buscar
+Eliminar
+Modificar
+Agregar
+Verificar
+
+
+
 const qy = require('../dataBase/mysqlConnect');
 
 class Categoria{
@@ -32,8 +40,14 @@ class Categoria{
         return respuesta
     };
 
-    static async categoriaLibro(id){
+    static async buscarCategoriaLibro(id){
         const query = 'SELECT categoria_id FROM libro WHERE categoria_id = ?';
+        const respuesta = await qy(query, [id]);
+        return respuesta
+    }
+
+    static async buscar(id){
+        const query = "SELECT * FROM categoria WHERE categoria_id = ?";
         const respuesta = await qy(query, [id]);
         return respuesta
     }
