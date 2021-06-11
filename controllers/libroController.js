@@ -56,10 +56,9 @@ const devolver = async (req, res, next) => {
   }
 };
 
-//Prestar un libro
+
 const prestar = async (req, res, next) => {
   try {
-    //no funciona el error cuando los parametros no se envian
     let respuesta = await libro.buscar(req.params.id);
     if (respuesta.length === 0) throw new Error("No se encuentra el libro");
 

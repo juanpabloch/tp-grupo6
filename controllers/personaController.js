@@ -35,6 +35,7 @@ const registrar = async(req ,res ,next)=>{
         }
         
         respuesta = await persona.agregar(req.body);
+        respuesta = await persona.buscarEmail(req.body.email);
         res.status(200).json(respuesta); 
         
     } catch (err) {

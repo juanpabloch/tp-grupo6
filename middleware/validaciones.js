@@ -25,7 +25,6 @@
 const params = (req, res, next)=>{
     const { id } = req.params;
     if(Number(id)){
-        console.log('id correcto');
         next();
     }else{
         const error = new Error('id invalido');
@@ -38,7 +37,7 @@ const params = (req, res, next)=>{
 // Validaciones de Persona
 
 const validarRegistro = (req, res, next)=>{
-    const {nombre, apellido, alias, email} = req.body;
+    let {nombre, apellido, alias, email} = req.body;
     try {
         if (!nombre || !apellido || !alias || !email)throw new Error ('Falta enviar datos');
         if (nombre.length < 3)throw new Error ('el nombre debe tener al menos 3 letras');
@@ -64,13 +63,15 @@ const bodyLibro = (req, res, next)=>{
         if( !req.body.nombre || !req.body.categoria_id ) throw new Error('nombre y categoría son datos obligatorios');
 
         let { nombre, descripcion } = req.body;
-
+        nombre = nombre.toUpperCase();
         nombre = nombre.replace(/  +/ig,' ');
         nombre = nombre.trim();
-        req.body.nombre  = nombre.match(/^([a-zA-Z]{3,}\s?[a-zA-Z]{1,}\s?([a-zA-Z]{1,})?)/ig);
-        
-        if( nombre === null ) throw new Error('el nombre debe tener mas de 3 caracteres');
-        
+
+        req.body.nombre  = nombre.match(/^[A-Z]{3,}\s(([A-Z]{1,}\s?){1,15})/ig);
+   
+        if( req.body.nombre === null ) throw new Error('el nombre debe tener mas de 3 caracteres');
+
+        descripcion = descripcion.toUpperCase();
         descripcion = descripcion.trim();
         req.body.descripcion = descripcion.replace(/  +/ig,' ');
         
