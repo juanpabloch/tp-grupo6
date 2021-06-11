@@ -5,7 +5,7 @@ const cambiar_descripcion = async (req, res, next) => {
   try {
     const { nombre, persona_id, categoria_id, descripcion } = req.body;
     let respuesta = await libro.verificar(
-      nombre.toUpperCase(),
+      nombre,
       persona_id,
       categoria_id,
       req.params.id
@@ -15,7 +15,7 @@ const cambiar_descripcion = async (req, res, next) => {
     }
     let descripcion_aux = "";
     if (descripcion) {
-      descripcion_aux = descripcion.toUpperCase();
+      descripcion_aux = descripcion;
     }
     respuesta = await libro.modificar(
       nombre,
