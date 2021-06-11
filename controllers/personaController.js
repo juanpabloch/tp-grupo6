@@ -17,6 +17,9 @@ const lista = async(req, res, next)=>{
 const buscar = async(req, res, next)=>{
     try {
         const respuesta = await persona.buscar(req.params.id);
+        if (respuesta.length === 0){
+            throw new Error('no se encuentra esa persona');
+        }
         res.status(200).json(respuesta);
     } catch (err) {
         next(err);
