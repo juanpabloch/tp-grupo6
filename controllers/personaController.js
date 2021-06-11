@@ -39,12 +39,11 @@ const buscar = async(req,res,next)=>{
 
 const registro = async(req,res,next)=>{
     try{
-        validar.validarPersona(req.body);
-        let respuesta = await persona.existe(req.body.email);
+        let respuesta = await Modulo.existe(req.body);
         if (respuesta.length > 0){
             throw new Error('La persona ya existe');
         }
-        respuesta = await persona.guarda(req.body);
+        respuesta = await Modulo.guarda(req.body);
         console.log(respuesta);
         res.status(200).json(respuesta); 
         
