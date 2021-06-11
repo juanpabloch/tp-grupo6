@@ -37,48 +37,23 @@ const params = (req, res, next)=>{
 
 // Validaciones de Persona
 
-function validarPersona(datos){
-    const {nombre, apellido, alias, email} = datos;
-
-    if (!nombre || !apellido || !alias || !email){
-        throw new Error ('Falta enviar datos')
-    }
-    
-    if (typeof nombre !== 'string'){
-        throw new Error ('el nombre debe ser un String');
-    }
-    if (nombre.length <=4){
-        throw new Error ('el nombre debe tener al menos 5 caracteres');
-    }
-    if (!/^[a-z]+$/i.test(nombre)){
-        throw new Error ('el nombre debe contener solo caracteres de la a-z');
-    }
-    // ---
-    if (typeof apellido !== 'string'){
-        throw new Error ('el apellido debe ser un String');
-    }
-    if (apellido.length <=4){
-        throw new Error ('el apellido debe tener al menos 5 caracteres');
-    }
-    if (!/^[a-z]+$/i.test(apellido)){
-        throw new Error ('el apellido debe contener solo caracteres de la a-z');
-    }
-    // ---
-    if (typeof alias !== 'string'){
-        throw new Error ('el alias debe ser un String');
-    }
-    if (alias.length <=4){
-        throw new Error ('el alias debe tener al menos 5 caracteres');
-    }
-    if (!/^[a-z0-9_.]+$/i.test(alias)){
-        throw new Error ('el alias debe contener solo caracteres de la a-z');
-    }
-    // ---
-    if (typeof email !== 'string'){
-        throw new Error ('el email debe ser un String');
-    }
-    if (!/^[a-z0-9_.]+@[a-z0-9]+\.[a-z0-9_.]+$/i.test(email)){
-        throw new Error ('el email debe ser valido');
+const validarRegistro = (req, res, next)=>{
+    const {nombre, apellido, alias, email} = req.body;
+    try {
+        if (!nombre || !apellido || !alias || !email)throw new Error ('Falta enviar datos');
+        if (nombre.length < 3)throw new Error ('el nombre debe tener al menos 3 letras');
+        if (!/^[a-z]+$/i.test(nombre))throw new Error ('el nombre debe contener solo caracteres de la a-z');
+        if (apellido.length < 3)throw new Error ('el apellido debe tener al menos 3 letras');
+        if (!/^[a-z]+$/i.test(apellido))throw new Error ('el apellido debe contener solo caracteres de la a-z');
+        if (alias.length < 3)throw new Error ('el alias debe tener al menos 5 caracteres');
+        if (!/^[a-z0-9_.]+$/i.test(alias))throw new Error ('el alias debe contener solo caracteres de la a-z');
+        if (!/^[a-z0-9_.]+@[a-z0-9]+\.[a-z0-9_.]+$/i.test(email))throw new Error ('el email debe ser valido');
+        next();
+    } catch (err) {
+        if(err){
+            res.status(413).json({
+                error : err.message})
+        }
     }
 }
 
@@ -129,7 +104,7 @@ const personaok = (req, res, next)=>{
 
 module.exports = {
     params, 
-    validarPersona,
+    validarRegistro,
     bodyLibro,
     personaok
 }

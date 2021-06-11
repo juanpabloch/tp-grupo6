@@ -27,13 +27,13 @@ const buscar = async(req, res, next)=>{
 const registrar = async(req ,res ,next)=>{
     try{
         validar.validarPersona(req.body);
+
         let respuesta = await persona.buscarEmail(req.body.email);
         if (respuesta.length > 0){
             throw new Error('La persona ya existe');
         }
         
         respuesta = await persona.agregar(req.body);
-        console.log(respuesta);
         res.status(200).json(respuesta); 
         
     } catch (err) {
