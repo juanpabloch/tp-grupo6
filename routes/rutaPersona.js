@@ -15,7 +15,7 @@ const { validar } = require('../middleware');
 
 router.get('/', personasCtrl.lista);
 router.get("/:id",personasCtrl.buscar);
-router.post('/',personasCtrl.registro);
+router.post('/',validar.validarRegistro ,personasCtrl.registro);
 
 
 
