@@ -66,8 +66,8 @@ const bodyLibro = (req, res, next)=>{
         nombre = nombre.toUpperCase();
         nombre = nombre.replace(/  +/ig,' ');
         nombre = nombre.trim();
-
-        req.body.nombre  = nombre.match(/^[A-Z]{3,}\s(([A-Z]{1,}\s?){1,15})/ig);
+        
+        req.body.nombre  = nombre.match(/^[A-Z]{3,}\s?(([A-Z]{1,}\s?){1,15})/ig);
    
         if( req.body.nombre === null ) throw new Error('el nombre debe tener mas de 3 caracteres');
 
