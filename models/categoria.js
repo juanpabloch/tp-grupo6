@@ -16,11 +16,11 @@ module.exports = categoria;
 */
 //crear: lista, detalles, eliminar, nueva
 
-Buscar
-Eliminar
-Modificar
-Agregar
-Verificar
+//Buscar
+//Eliminar
+//Modificar
+//Agregar
+//Verificar
 
 
 

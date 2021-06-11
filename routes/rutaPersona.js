@@ -14,8 +14,8 @@ const { validar } = require('../middleware');
 // get('/') - get('/:id') - delete('/:id') - post('/') - put('/:id')
 
 router.get('/', personasCtrl.lista);
-router.get("/:id",personasCtrl.buscar);
-router.post('/',validar.validarRegistro ,personasCtrl.registro);
+router.get("/:id",validar.params,personasCtrl.buscar);
+router.post('/',validar.validarRegistro ,personasCtrl.registrar);
 
 
 

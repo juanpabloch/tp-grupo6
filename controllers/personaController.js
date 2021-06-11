@@ -2,7 +2,6 @@ const qy = require('../dataBase/mysqlConnect');
 
 const {  libro, persona, categoria  } = require("../models");
 
-const { validar } = require('../middleware');
 
 const lista = async(req, res, next)=>{
     try {   
@@ -26,7 +25,6 @@ const buscar = async(req, res, next)=>{
 
 const registrar = async(req ,res ,next)=>{
     try{
-        validar.validarPersona(req.body);
 
         let respuesta = await persona.buscarEmail(req.body.email);
         if (respuesta.length > 0){
