@@ -112,8 +112,24 @@ const bodyLibro = (req, res, next)=>{
     }
 }
 
+
+const personaok = (req, res, next)=>{
+    try {
+        if( !req.body.persona_id) throw new Error('El id de la persona a prestar el libro es un dato obligatorio');
+        next()
+        
+    } catch (err) {
+        if(err){
+            res.status(413).json({
+                error: err.message
+            })
+        }
+    }
+}
+
 module.exports = {
     params, 
     validarPersona,
-    bodyLibro
+    bodyLibro,
+    personaok
 }

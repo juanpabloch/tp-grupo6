@@ -5,14 +5,16 @@ const router = express.Router();
 //get('/') - get('/:id') - delete('/:id') - post('/') - put('/:id') - put('/prestar/:id') - put('/devolver/:id')
 
 //importamos controlador
-const {  librosCtrl  ,personasCtrl   ,categoriasCtrl   } = require("../controllers");
+const {  librosCtrl, personasCtrl, categoriasCtrl   } = require("../controllers");
 
 //importamos las validaciones
 const { validar } = require('../middleware');
 
-
+router.get('/', librosCtrl.todosl);
 
 router.post('/', validar.bodyLibro, librosCtrl.agregar);
+
+router.put("/prestar/:id", validar.params, validar.personaok, librosCtrl.prestar);
 
 router.put("/devolver/:id", validar.params, librosCtrl.devolver);
 
