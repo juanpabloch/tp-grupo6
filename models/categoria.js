@@ -32,7 +32,7 @@ class Categoria{
         const query = 'SELECT * FROM categoria';
         const respuesta = await qy(query);
         return respuesta
-    }
+    };
 
     static async eliminar(id){
         const query = 'DELETE FROM categoria WHERE categoria_id = ?';
@@ -40,18 +40,31 @@ class Categoria{
         return respuesta
     };
 
+    static detalles () {
+        const query = 'SELECT * FROM categoria WHERE categoria_id = ?';
+        const respuesta = qy(query);
+        return respuesta
+    };
+
+    static nueva () {
+        const query = 'SELECT * FROM categoria WHERE nombre = ?'
+        const respuesta = qy(query, [req.body.nombre.toUpperCase()]);
+        return respuesta
+
+    };
+
     static async buscarCategoriaLibro(id){
         const query = 'SELECT categoria_id FROM libro WHERE categoria_id = ?';
         const respuesta = await qy(query, [id]);
         return respuesta
-    }
+    };
 
     static async buscar(id){
         const query = "SELECT * FROM categoria WHERE categoria_id = ?";
         const respuesta = await qy(query, [id]);
         return respuesta
-    }
+    };
 
-}
+};
 
 module.exports = Categoria

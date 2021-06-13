@@ -28,6 +28,54 @@ const lista = async(req, res, next)=>{
     }
 }
 
+const detalles = async(req, res, next)=> {
+    try {
+        const respuesta = await  categoria.detalles();
+        if(respuesta.length === 0)throw new Error('categoria no encontrada');
+        res.status(200).json(respuesta);
+    }
+    catch (err) {
+        if(err.code === undefined){
+            res.status(413).json({
+                error: err.message
+            })
+        }else{
+            next(err);
+        }
+}
+}
+
+const nueva = async (req, res, next)=> {
+    try{
+        
+        const respuesta = await categoria.nueva();
+        
+        if (respuesta.length > 0) {
+            throw new Error ('Ese nombre de categoria ya existe')
+        }
+
+        query = 'INSERT INTO categoria (nombre) value (?)'
+
+        respuesta = await qy(query, [nombre]);
+        
+        res.send({'respuesta': respuesta.insertId});
+
+        
+        res.status(200).json(respuesta );
+
+    }
+
+    catch (err) {
+        if(err.code === undefined){
+            res.status(413).json({
+                error: err.message
+            })
+        }else{
+            next(err);
+        }
+    
+}
+}
 
 const eliminar = async(req, res, next)=>{
     try {
@@ -53,5 +101,7 @@ const eliminar = async(req, res, next)=>{
 
 module.exports = {
     lista,
-    eliminar
-}
+    eliminar,
+    detalles,
+    nueva
+};
