@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-//requerimos las rutas
-const categoria = require('./rutaCategoria');
-const persona = require('./rutaPersona');
-const libro = require('./rutaLibro');
+const categoriaRouter = require('./rutaCategoria');
+const personaRouter = require('./rutaPersona');
+const libroRouter = require('./rutaLibro');
 
 router.get('/', (req, res)=>{
     res.json({
@@ -12,9 +11,9 @@ router.get('/', (req, res)=>{
     }).status(200);
 })
 
-router.use('/categoria', categoria);
-router.use('/persona', persona);
-router.use('/libro', libro);
+router.use('/categoria', categoriaRouter);
+router.use('/persona', personaRouter);
+router.use('/libro', libroRouter);
 
 
 module.exports = router;

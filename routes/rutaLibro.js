@@ -1,22 +1,25 @@
 const express = require("express");
 const router = express.Router();
 
-//crear rutas
-//get('/') - get('/:id') - delete('/:id') - post('/') - put('/:id') - put('/prestar/:id') - put('/devolver/:id')
-
 //importamos controlador
-const controlador = require('../controllers/libroController');
+const {  librosCtrl, personasCtrl, categoriasCtrl   } = require("../controllers");
 
 //importamos las validaciones
-const validacion = require('../validaciones/validaciones');
+const { validar } = require('../middleware');
 
+router.get('/', librosCtrl.lista);
 
-router.get("/", (req, res) => {
-  res.send("Bienvenidos al Home").status(200);
-});
+router.post('/', validar.bodyLibro, librosCtrl.agregar);
 
-router.delete("/:id", controlador.libro_borrar);
-router.put("/devolver/:id", controlador.libro_devolver);
-router.put("/:id", controlador.libro_descripcion);
+router.put("/prestar/:id", validar.params, validar.personaok, librosCtrl.prestar);
+
+router.put("/devolver/:id", validar.params, librosCtrl.devolver);
+
+router.put("/:id", validar.params,validar.bodyLibro, librosCtrl.cambiar_descripcion);
+
+router.get('/:id', validar.params, librosCtrl.buscar);
+
+router.delete("/:id", validar.params, librosCtrl.borrar);
+
 
 module.exports = router;

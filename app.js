@@ -1,27 +1,17 @@
-require('dotenv').config();
 const express = require('express');
 const app = express();
-
+const { errores , validar } = require('./middleware');
 const router = require('./routes');
 
 //set port
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3306;
 
 
 //middlewares
 app.use(express.json());
-
-//routes
 app.use(router);
-
-
-app.use((err, req, res, next)=>{
-  if(err){
-      res.status(err.status || 500).json({
-        mensaje: 'Error inesperado'
-      })
-  }
-})
+app.use(errores.is404);
+app.use(errores.is500);
 
 app.listen(port, () => {
   console.log(`server listening on port: ${port}`);

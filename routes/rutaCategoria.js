@@ -1,16 +1,18 @@
 const express = require('express');
 const router = express.Router();
 
-//crear las rutas 
-// get('/') - get('/:id') - delete('/:id') - post('/')
-
-
 //importamos controlador
-const controlador = require('../controllers/categoriaController')
+const {  librosCtrl  ,personasCtrl   ,categoriasCtrl   } = require("../controllers");
 //importamos las validaciones
-const validacion = require('../validaciones/validaciones');
+ const { validar } = require('../middleware');
 
 
-router.get('/', controlador.categoria_lista);
+router.get('/', categoriasCtrl.lista);
+
+router.post('/', validar.validarNombre,categoriasCtrl.agregar);
+
+router.get('/:id', validar.params, categoriasCtrl.buscar);
+
+router.delete('/:id', validar.params ,categoriasCtrl.eliminar);
 
 module.exports = router;

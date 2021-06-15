@@ -1,29 +1,23 @@
-// ejemplo
+const {  libro, persona, categoria  } = require("../models");
 
-// //importamos base de datos para poder hacer los query
-// const qy = require('../dataBase/mysqlConnect');
-
-//creamos el controlador este puede ser para la ruta get('/')
-// const categoria_lista = async(req, res, next)=>{
-//     try {
-        
-//         aca colocamos toda la logica para llamar los datos de la base de datos
-
-//     } catch (err) {
-        
-//         capturamos los errores y los mostramos en pantalla {error: error que capturamos}
-
-//     }
-// }
-
-const Modelo = require('../models/categoriaModelo');
-
-const categoria_lista = async(req, res, next)=>{
+const lista = async(req, res, next)=>{
     try {   
-        const respuesta = await Modelo.lista();
+        let respuesta = await categoria.lista();
         if(respuesta.length === 0)throw new Error('no hay categorias para mostrar');
         res.status(200).json(respuesta);
     } catch (err) {
+        next(err);
+    }
+}
+
+const buscar = async(req, res, next)=> {
+    try {
+        const { id } = req.params;
+        let respuesta = await  categoria.buscar(id);
+        if(respuesta.length === 0)throw new Error('categoria no encontrada');
+        res.status(200).json(respuesta);
+    }
+    catch (err) {
         if(err.code === undefined){
             res.status(413).json({
                 error: err.message
@@ -31,9 +25,50 @@ const categoria_lista = async(req, res, next)=>{
         }else{
             next(err);
         }
+}
+}
+
+const agregar = async (req, res, next)=> {
+    try{
+        const nombre = req.body.nombre.toUpperCase();
+        let respuesta = await categoria.buscarNombre(nombre);
+        if (respuesta.length > 0)throw new Error ('Ese nombre de categoria ya existe');
+
+        respuesta = await categoria.agregar(nombre);
+
+        respuesta = await categoria.buscar(respuesta.insertId);
+
+        res.status(200).json(respuesta);
+    }
+    catch (err) {
+        next(err);
+    }
+}
+
+const eliminar = async(req, res, next)=>{
+    try {
+        const { id } = req.params;
+        let respuesta = await categoria.buscar(id);
+        if(respuesta.length === 0)throw new Error('no existe la categoria indicada');
+
+        
+        respuesta = await categoria.buscarCategoriaLibro(id);
+        if(respuesta.length > 0)throw new Error('categoria con libros asociados, no se puede eliminar') 
+
+        respuesta = await categoria.eliminar(id);
+
+        res.status(200).json({
+            mensaje: 'se borro correctamente'
+        });
+
+    } catch (err) {
+        next(err);
     }
 }
 
 module.exports = {
-    categoria_lista
-}
+    lista,
+    eliminar,
+    buscar,
+    agregar
+};

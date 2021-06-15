@@ -2,13 +2,12 @@ const mysql = require('mysql');
 const util = require('util');
 
 const mysqlOptions = {
-    host: process.env.DB_HOST,
-      user: process.env.DB_USER,
-      password: process.env.DB_PASS,
-      port:process.env.DB_PORT,
-      database: process.env.DB_NAME
+    host: 'TU HOST',
+    user: 'TU USUARIO',
+    password: 'TU PASS',
+    port:3306,
+    database: 'TUDB'
 }
-
 const connection = mysql.createConnection(mysqlOptions)
 connection.connect((err)=>{
     if(err)throw new Error('Error al conectar a la base de datos');
