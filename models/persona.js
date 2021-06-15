@@ -31,31 +31,31 @@ class Persona {
     return respuesta;
   }
 
-  // static async eliminar(id){
-  //   const query = 'DELETE FROM persona WHERE persona_id = ?'
-  //   const respuesta = await qy(query, [id]);
-  //   return respuesta
-  // }
+  static async eliminar(id){
+     const query = 'DELETE FROM persona WHERE persona_id = ?'
+     const respuesta = await qy(query, [id]);
+     return respuesta
+  }
 
-  // static async buscarPersonaEnLibro(id){
-  //     const query = 'SELECT persona_id FROM libro where persona_id = ?'
-  //     const respuesta = await qy(query, [id]);
-  //     return respuesta
-  // }
+   static async buscarPersonaEnLibro(id){
+       const query = 'SELECT persona_id FROM libro where persona_id = ?'
+       const respuesta = await qy(query, [id]);
+       return respuesta
+   }
 
 
-  // static async verificar(email, id) {
-  //   const query = "SELECT * FROM persona WHERE persona_id = ? AND email = ?";
-  //   let respuesta = await qy(query, [id, email]);
-  //   return respuesta;
-  // }
+   static async verificar(email, id) {
+     const query = "SELECT * FROM persona WHERE persona_id = ? AND email = ?";
+     let respuesta = await qy(query, [id, email]);
+     return respuesta;
+   }
 
-  // static async modificar(nombre, apellido, alias, id) {
-  //   const query =
-  //     "UPDATE persona SET nombre = ?, apellido = ?,alias  = ? WHERE persona_id = ?";
-  //   let respuesta = await qy(query, [nombre, apellido, alias, id]);
-  //   return respuesta;
-  // }
+   static async modificar(nombre, apellido, alias, id) {
+     const query =
+       "UPDATE persona SET nombre = ?, apellido = ?,alias  = ? WHERE persona_id = ?";
+     let respuesta = await qy(query, [nombre, apellido, alias, id]);
+     return respuesta;
+   }
 
 }
 
