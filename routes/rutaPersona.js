@@ -14,9 +14,9 @@ const { validar } = require('../middleware');
 // get('/') - get('/:id') - delete('/:id') - post('/') - put('/:id')
 
 router.get('/', personasCtrl.lista);
-router.get("/:id",validar.params,personasCtrl.buscar);
-router.post('/',validar.validarRegistro ,personasCtrl.registrar);
-
-
+router.post('/', validar.validarRegistro, personasCtrl.registrar);
+router.get("/:id", validar.params, personasCtrl.buscar);
+// router.delete('/:id', personasCtrl.eliminar);
+// router.put('/:id', validar.params, personasCtrl.modificar);
 
 module.exports = router;
