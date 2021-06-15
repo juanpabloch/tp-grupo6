@@ -4,7 +4,7 @@ const { errores , validar } = require('./middleware');
 const router = require('./routes');
 
 //set port
-const port = process.env.PORT || 3306;
+const port = process.env.PORT || 3000;
 
 
 //middlewares
