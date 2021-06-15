@@ -91,6 +91,6 @@ module.exports = {
     registrar, 
     buscar,
     // eliminar,
-    modificar
+    // modificar
 }
 

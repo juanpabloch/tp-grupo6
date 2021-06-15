@@ -49,7 +49,7 @@ const devolver = async (req, res, next) => {
     if (respuesta.length > 0) throw new Error("ese libro no estaba prestado!");
 
     respuesta = await libro.devolver(req.params.id);
-    res.status(200).json("se realizo la devolución correctamente");
+    res.status(200).json({mensaje: "se realizo la devolución correctamente"});
 
   }  catch (err) {
     next(err);
@@ -89,7 +89,7 @@ const borrar = async (req, res, next) => {
       throw new Error("ese libro esta prestado no se puede borrar");
 
     respuesta = await libro.eliminar(req.params.id);
-    res.status(200).json("se borro correctamente");
+    res.status(200).json({mensaje: "se borro correctamente"});
 
   } catch (err) {
     next(err);
