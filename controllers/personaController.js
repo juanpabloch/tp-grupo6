@@ -14,7 +14,8 @@ const lista = async (req, res, next) => {
 
 const buscar = async (req, res, next) => {
   try {
-    let respuesta = await persona.buscar(req.params.id);
+    const { id } = req.params;
+    let respuesta = await persona.buscar(id);
     if (respuesta.length === 0) {
       throw new Error("no se encuentra esa persona");
     }
@@ -28,7 +29,7 @@ const registrar = async (req, res, next) => {
   try {
     const { nombre, apellido, alias, email } = req.body;
 
-    let respuesta = await persona.buscarEmail(email);
+    let respuesta = await persona.buscarEmail(email.toUpperCase());
     if (respuesta.length > 0) {
       throw new Error("El email ya se encuentra registrado");
     }
@@ -79,7 +80,7 @@ const modificar = async (req, res, next) => {
     let respuesta = await persona.buscar(id);
     if (respuesta.length === 0) throw new Error("no se encuentra esa persona");
 
-    respuesta = await persona.verificar(email, id);
+    respuesta = await persona.verificar(email.toUpperCase(), id);
     if (respuesta.length === 0) throw new Error("No puedes cambiar el mail");
 
     respuesta = await persona.modificar(

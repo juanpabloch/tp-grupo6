@@ -78,7 +78,7 @@ const prestar = async (req, res, next) => {
           " a la que se le quiere prestar el libro"
       );
 
-    respuesta = await libro.prestar(req.body.persona_id, req.params.id);
+    respuesta = await libro.prestar(persona_id, id);
 
     res.status(200).json({ menasaje: "El libro se presto correctamente" });
   } catch (err) {
