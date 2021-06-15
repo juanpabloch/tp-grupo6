@@ -18,13 +18,7 @@ const buscar = async(req, res, next)=> {
         res.status(200).json(respuesta);
     }
     catch (err) {
-        if(err.code === undefined){
-            res.status(413).json({
-                error: err.message
-            })
-        }else{
             next(err);
-        }
 }
 }
 
