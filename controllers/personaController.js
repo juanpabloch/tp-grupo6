@@ -43,48 +43,48 @@ const registrar = async(req ,res ,next)=>{
     }
 }
 
-// const eliminar = async (req, res, next)=>{
-//     try {
-//         const { id } = req.params;
+const eliminar = async (req, res, next)=>{
+     try {
+         const { id } = req.params;
 
-//         let respuesta = await persona.buscar(id);
-//         if(respuesta.length === 0)throw new Error('no existe esa persona');
+      let respuesta = await persona.buscar(id);
+         if(respuesta.length === 0)throw new Error('no existe esa persona');
 
-//         respuesta = await persona.buscarPersonaEnLibro(id);
-//         if(respuesta.length > 0)throw new Error('esa persona tiene libros asociados, no se puede eliminar');
+         respuesta = await persona.buscarPersonaEnLibro(id);
+         if(respuesta.length > 0)throw new Error('esa persona tiene libros asociados, no se puede eliminar');
 
-//         respuesta = await persona.eliminar(id);
+         respuesta = await persona.eliminar(id);
 
-//         res.status(200).json({
-//             mensaje: 'se borro correctamente'
-//         })
+         res.status(200).json({
+             mensaje: 'se borro correctamente'
+         })
 
-//     } catch (err) {
-//         next(err)
-//     }
-// }
+     } catch (err) {
+         next(err)
+     }
+ }
 
-// const modificar = async (req, res, next) => {
-//     try {
-//         const { nombre, apellido, alias, email } = req.body;
-//         const { id } = req.params;  
+ const modificar = async (req, res, next) => {
+     try {
+         const { nombre, apellido, alias, email } = req.body;
+         const { id } = req.params;  
 
-//         let respuesta = await persona.buscar(id);
-//         if (respuesta.length === 0) throw new Error("no se encuentra esa persona");
+         let respuesta = await persona.buscar(id);
+         if (respuesta.length === 0) throw new Error("no se encuentra esa persona");
   
-//         respuesta = await persona.verificar(email, id);
-//         if (respuesta.length === 0)throw new Error("No puedes cambiar el mail");
+         respuesta = await persona.verificar(email, id);
+         if (respuesta.length === 0)throw new Error("No puedes cambiar el mail");
         
-//         respuesta = await persona.modificar(nombre.toUpperCase(), apellido.toUpperCase(), alias.toUpperCase(), id);
-//         if(respuesta.affectedRows){
-//             const modificado = req.body;
-//             res.status(200).json({ modificado });
-//         }
+         respuesta = await persona.modificar(nombre.toUpperCase(), apellido.toUpperCase(), alias.toUpperCase(), id);
+         if(respuesta.affectedRows){
+             const modificado = req.body;
+             res.status(200).json({ modificado });
+         }
 
-//     } catch (err) {
-//         next(err);
-//     }
-//   };
+     } catch (err) {
+         next(err);
+     }
+   };
 
 module.exports = {
     lista, 
