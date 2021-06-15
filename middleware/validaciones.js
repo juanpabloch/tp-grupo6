@@ -28,14 +28,14 @@ const validarRegistro = (req, res, next) => {
   try {
     if (!nombre || !apellido || !alias || !email)
       throw new Error("Falta enviar datos");
-    if (nombre.length < 3)
-      throw new Error("el nombre debe tener al menos 3 letras");
-    if (!/^[a-z]+$/i.test(nombre))
-      throw new Error("el nombre debe contener solo caracteres de la a-z");
-    if (apellido.length < 3)
-      throw new Error("el apellido debe tener al menos 3 letras");
-    if (!/^[a-z]+$/i.test(apellido))
-      throw new Error("el apellido debe contener solo caracteres de la a-z");
+      if (!/^[a-zA-ZÀ-ÿ]{2,}\s?(([a-zA-ZÀ-ÿ]{1,}\s?){1,3})/gi.test(nombre))
+      throw new Error(
+        "el nombre debe contener solo caracteres 3 como minimo y deben ser alfabeticos "
+      );
+      if (!/^[a-zA-ZÀ-ÿ]{2,}\s?(([a-zA-ZÀ-ÿ]{1,}\s?){1,3})/gi.test(apellido))
+      throw new Error(
+        "el nombre debe contener solo caracteres 3 como minimo y deben ser alfabeticos "
+      );
     if (alias.length < 3)
       throw new Error("el alias debe tener al menos 5 caracteres");
     if (!/^[a-z0-9_.]+$/i.test(alias))
@@ -58,9 +58,9 @@ const bodyLibro = (req, res, next) => {
     nombre = nombre.replace(/  +/gi, " ");
     nombre = nombre.trim();
 
-    if (!/^[A-Z]{2,}\s?(([A-Z]{1,}\s?){1,15})/gi.test(nombre))
+    if (!/^[a-zA-ZÀ-ÿ]{2,}\s?(([a-zA-ZÀ-ÿ]{1,}\s?){1,15})/gi.test(nombre))
       throw new Error(
-        "el nombre debe contener solo caracteres alfabeticos y como minimo 3"
+        "el nombre debe contener solo caracteres 3 como minimo y deben ser alfabeticos "
       );
 
     descripcion = descripcion.trim();
