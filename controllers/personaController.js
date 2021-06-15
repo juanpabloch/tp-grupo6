@@ -90,7 +90,7 @@ module.exports = {
     lista, 
     registrar, 
     buscar,
-    // eliminar,
-    // modificar
+    eliminar,
+    modificar
 }
 
