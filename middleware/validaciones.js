@@ -34,6 +34,18 @@ const params = (req, res, next) => {
   }
 };
 
+//validaciones categorias
+const validarNombre = (req, res, next)=>{
+  const { nombre } = req.body;
+  try {
+    if(!nombre)throw new Error("Falta enviar datos");
+    if (nombre.length < 3)throw new Error("el nombre debe tener al menos 3 letras");
+    next()
+  } catch (error) {
+      next(error)
+  }
+}
+
 // Validaciones de Persona
 
 const validarRegistro = (req, res, next) => {
@@ -108,4 +120,5 @@ module.exports = {
   validarRegistro,
   bodyLibro,
   personaok,
+  validarNombre
 };

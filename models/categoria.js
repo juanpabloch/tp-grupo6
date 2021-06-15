@@ -1,29 +1,3 @@
-/*
-ejemplo
-
-const qy = require('../dataBase/mysqlConnect'); //importamos para crear queries
-
-class categoria {
-
-    static lista() {
-        const query = 'SELECT * FROM generos'
-        const response = qy(query);
-        return response //retorna la lista de categorias
-    }
-}
-
-module.exports = categoria;
-*/
-//crear: lista, detalles, eliminar, nueva
-
-//Buscar
-//Eliminar
-//Modificar
-//Agregar
-//Verificar
-
-
-
 const qy = require('../dataBase/mysqlConnect');
 
 class Categoria{
@@ -40,15 +14,9 @@ class Categoria{
         return respuesta
     };
 
-    static detalles () {
-        const query = 'SELECT * FROM categoria WHERE categoria_id = ?';
-        const respuesta = qy(query);
-        return respuesta
-    };
-
-    static nueva () {
-        const query = 'SELECT * FROM categoria WHERE nombre = ?'
-        const respuesta = qy(query, [req.body.nombre.toUpperCase()]);
+    static buscarNombre (nombre) {
+        const query = 'SELECT nombre FROM categoria WHERE nombre = ?'
+        const respuesta = qy(query, [nombre]);
         return respuesta
 
     };
@@ -65,6 +33,11 @@ class Categoria{
         return respuesta
     };
 
+    static async agregar(categoria){
+        const query = 'INSERT INTO categoria (nombre) VALUE (?)';
+        const respuesta = await qy(query, [categoria]);
+        return respuesta
+    }
 };
 
 module.exports = Categoria

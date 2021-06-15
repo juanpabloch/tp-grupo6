@@ -12,6 +12,8 @@ const {  librosCtrl  ,personasCtrl   ,categoriasCtrl   } = require("../controlle
 
 
 router.get('/', categoriasCtrl.lista);
+router.post('/', validar.validarNombre,categoriasCtrl.agregar);
+router.get('/:id', validar.params, categoriasCtrl.buscar);
 router.delete('/:id', validar.params ,categoriasCtrl.eliminar);
 
 module.exports = router;
