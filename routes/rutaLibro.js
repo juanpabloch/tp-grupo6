@@ -1,9 +1,6 @@
 const express = require("express");
 const router = express.Router();
 
-//crear rutas
-//get('/') - get('/:id') - delete('/:id') - post('/') - put('/:id') - put('/prestar/:id') - put('/devolver/:id')
-
 //importamos controlador
 const {  librosCtrl, personasCtrl, categoriasCtrl   } = require("../controllers");
 

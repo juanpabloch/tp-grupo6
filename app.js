@@ -1,18 +1,15 @@
-require('dotenv').config();
 const express = require('express');
 const app = express();
 const { errores , validar } = require('./middleware');
 const router = require('./routes');
 
 //set port
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3306;
 
 
 //middlewares
 app.use(express.json());
-//routes
 app.use(router);
-
 app.use(errores.is404);
 app.use(errores.is500);
 

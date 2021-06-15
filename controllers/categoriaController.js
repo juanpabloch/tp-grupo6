@@ -2,7 +2,7 @@ const {  libro, persona, categoria  } = require("../models");
 
 const lista = async(req, res, next)=>{
     try {   
-        const respuesta = await categoria.lista();
+        let respuesta = await categoria.lista();
         if(respuesta.length === 0)throw new Error('no hay categorias para mostrar');
         res.status(200).json(respuesta);
     } catch (err) {
@@ -13,7 +13,7 @@ const lista = async(req, res, next)=>{
 const buscar = async(req, res, next)=> {
     try {
         const { id } = req.params;
-        const respuesta = await  categoria.buscar(id);
+        let respuesta = await  categoria.buscar(id);
         if(respuesta.length === 0)throw new Error('categoria no encontrada');
         res.status(200).json(respuesta);
     }
@@ -34,9 +34,9 @@ const agregar = async (req, res, next)=> {
         let respuesta = await categoria.buscarNombre(nombre);
         if (respuesta.length > 0)throw new Error ('Ese nombre de categoria ya existe');
 
-        const respuestaInsert = await categoria.agregar(nombre);
+        respuesta = await categoria.agregar(nombre);
 
-        respuesta = await categoria.buscar(respuestaInsert.insertId);
+        respuesta = await categoria.buscar(respuesta.insertId);
 
         res.status(200).json(respuesta);
     }

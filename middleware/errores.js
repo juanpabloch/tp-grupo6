@@ -8,7 +8,7 @@ exports.is500 = (error, req, res, next) => {
         mensaje: error.message,
       })
     : res.json({
-        mensaje: "error inesperado",
+        mensaje: "error inesperado"+ error.message,
       })
 };
 

@@ -1,27 +1,3 @@
-//vamos a colocar todas la validaciones en este archivo
-
-// ej:
-// const <nombre funcion> = (req, res, next)=>{
-//     traemos los parametros a validar, con req.params o req.body
-//     realizamos la consulta con if()
-//     if(true){
-//         next()
-//     }else{
-//         error
-//     }
-// }
-
-// o tambien:
-// const <nombre funcion> = (req, res, next)=>{
-//     if(true){
-//        return next()
-//     }
-//
-//     error
-// }
-
-//por ultimo exportamos la funcion
-
 const params = (req, res, next) => {
   const { id } = req.params;
   try {
@@ -34,19 +10,18 @@ const params = (req, res, next) => {
   }
 };
 
-//validaciones categorias
-const validarNombre = (req, res, next)=>{
+
+const validarNombre = (req, res, next) => {
   const { nombre } = req.body;
   try {
-    if(!nombre)throw new Error("Falta enviar datos");
-    if (nombre.length < 3)throw new Error("el nombre debe tener al menos 3 letras");
-    next()
+    if (!nombre) throw new Error("Falta enviar datos");
+    if (nombre.length < 3)
+      throw new Error("el nombre debe tener al menos 3 letras");
+    next();
   } catch (error) {
-      next(error)
+    next(error);
   }
-}
-
-// Validaciones de Persona
+};
 
 const validarRegistro = (req, res, next) => {
   let { nombre, apellido, alias, email } = req.body;
@@ -73,24 +48,21 @@ const validarRegistro = (req, res, next) => {
   }
 };
 
-//validaciones libro
-
 const bodyLibro = (req, res, next) => {
   try {
     if (!req.body.nombre || !req.body.categoria_id)
       throw new Error("nombre y categoría son datos obligatorios");
 
     let { nombre, descripcion } = req.body;
-    nombre = nombre.toUpperCase();
+
     nombre = nombre.replace(/  +/gi, " ");
     nombre = nombre.trim();
 
-    req.body.nombre = nombre.match(/^[A-Z]{2,}\s?(([A-Z]{1,}\s?){1,15})/gi);
+    if (!/^[A-Z]{2,}\s?(([A-Z]{1,}\s?){1,15})/gi.test(nombre))
+      throw new Error(
+        "el nombre debe contener solo caracteres alfabeticos y como minimo 3"
+      );
 
-    if (req.body.nombre === null)
-      throw new Error("el nombre debe tener mas de 3 caracteres");
-
-    descripcion = descripcion.toUpperCase();
     descripcion = descripcion.trim();
     req.body.descripcion = descripcion.replace(/  +/gi, " ");
 
@@ -120,5 +92,5 @@ module.exports = {
   validarRegistro,
   bodyLibro,
   personaok,
-  validarNombre
+  validarNombre,
 };

@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-//requerimos las rutas
 const categoriaRouter = require('./rutaCategoria');
 const personaRouter = require('./rutaPersona');
 const libroRouter = require('./rutaLibro');
