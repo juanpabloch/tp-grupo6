@@ -1,4 +1,4 @@
-exports.is500 = (error, req, res, next) => {
+exports.handler = (error, req, res, next) => {
   if(error.code === undefined){
       error.status = 413;
     }
@@ -8,7 +8,7 @@ exports.is500 = (error, req, res, next) => {
         mensaje: error.message,
       })
     : res.json({
-        mensaje: "error inesperado"+ error.message,
+        mensaje: "error inesperado",
       })
 };
 

@@ -11,7 +11,7 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 app.use(router);
 app.use(errores.is404);
-app.use(errores.is500);
+app.use(errores.handler);
 
 app.listen(port, () => {
   console.log(`server listening on port: ${port}`);
