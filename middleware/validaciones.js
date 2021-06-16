@@ -13,6 +13,8 @@ const params = (req, res, next) => {
 const bodyCategoria = (req, res, next) => {
   let { nombre } = req.body;
   try {
+    if (!nombre)
+    throw new Error("Falta enviar datos");
     nombre = nombre.replace(/  +/gi, " ");
     nombre = nombre.trim();
     if (!/^([^0-9_@./#&+*-?!><]*)$/gi.test(nombre))
