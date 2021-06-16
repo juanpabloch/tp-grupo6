@@ -1,4 +1,5 @@
 # Where'is my books?
+ - Cambiar credenciales /database/mysqlConnect.js
  - npm install 
  - npm run dev
 ## Postman
