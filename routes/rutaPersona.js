@@ -13,7 +13,7 @@ router.post("/", validar.bodyPersona, personasCtrl.registrar);
 
 router.get("/:id", validar.params, personasCtrl.buscar);
 
-router.delete("/:id", personasCtrl.eliminar);
+router.delete("/:id", validar.params, personasCtrl.eliminar);
 
 router.put("/:id", validar.params, validar.bodyPersona, personasCtrl.modificar);
 
