@@ -1,11 +1,10 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const { errores , validar } = require('./middleware');
-const router = require('./routes');
+const { errores, validar } = require("./middleware");
+const router = require("./routes");
 
 //set port
 const port = process.env.PORT || 3000;
-
 
 //middlewares
 app.use(express.json());

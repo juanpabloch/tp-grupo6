@@ -1,15 +1,15 @@
 exports.handler = (error, req, res, next) => {
-  if(error.code === undefined){
-      error.status = 413;
-    }
+  if (error.code === undefined) {
+    error.status = 413;
+  }
   res.status(error.status || 500);
-  res.statusCode === 404 || res.statusCode === 413 
+  res.statusCode === 404 || res.statusCode === 413
     ? res.json({
         mensaje: error.message,
       })
     : res.json({
         mensaje: "error inesperado",
-      })
+      });
 };
 
 exports.is404 = (req, res, next) => {

@@ -1,3 +1,2 @@
-exports.validar  = require('./validaciones');
-exports.errores  = require('./errores');
-
+exports.validar = require("./validaciones");
+exports.errores = require("./errores");
