@@ -11,7 +11,7 @@ const params = (req, res, next) => {
 };
 
 
-const validarNombre = (req, res, next) => {
+const bodyCategoria = (req, res, next) => {
   const { nombre } = req.body;
   try {
     if (!nombre) throw new Error("Falta enviar datos");
@@ -23,8 +23,8 @@ const validarNombre = (req, res, next) => {
   }
 };
 
-const validarRegistro = (req, res, next) => {
-  let { nombre, apellido, alias, email } = req.body;
+const bodyPersona = (req, res, next) => {
+  const { nombre, apellido, alias, email } = req.body;
   try {
     if (!nombre || !apellido || !alias || !email)
       throw new Error("Falta enviar datos");
@@ -48,7 +48,7 @@ const validarRegistro = (req, res, next) => {
   }
 };
 
-const bodyLibro = (req, res, next) => {
+const bodyLibroLong = (req, res, next) => {
   try {
     if (!req.body.nombre || !req.body.categoria_id)
       throw new Error("nombre y categoría son datos obligatorios");
@@ -75,9 +75,10 @@ const bodyLibro = (req, res, next) => {
   }
 };
 
-const personaok = (req, res, next) => {
+const bodyLibroShort = (req, res, next) => {
   try {
-    if (!req.body.persona_id)
+    const { persona_id } = req.body;
+    if (!persona_id)
       throw new Error(
         "El id de la persona a prestar el libro es un dato obligatorio"
       );
@@ -89,8 +90,8 @@ const personaok = (req, res, next) => {
 
 module.exports = {
   params,
-  validarRegistro,
-  bodyLibro,
-  personaok,
-  validarNombre,
+  bodyPersona,
+  bodyLibroLong,
+  bodyLibroShort,
+  bodyCategoria,
 };

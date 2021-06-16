@@ -9,7 +9,7 @@ const { validar } = require('../middleware');
 
 router.get('/', personasCtrl.lista);
 
-router.post('/', validar.validarRegistro, personasCtrl.registrar);
+router.post('/', validar.bodyPersona, personasCtrl.registrar);
 
 router.get("/:id", validar.params, personasCtrl.buscar);
 

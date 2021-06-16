@@ -9,13 +9,13 @@ const { validar } = require('../middleware');
 
 router.get('/', librosCtrl.lista);
 
-router.post('/', validar.bodyLibro, librosCtrl.agregar);
+router.post('/', validar.bodyLibroLong, librosCtrl.agregar);
 
-router.put("/prestar/:id", validar.params, validar.personaok, librosCtrl.prestar);
+router.put("/prestar/:id", validar.params, validar.bodyLibroShort, librosCtrl.prestar);
 
 router.put("/devolver/:id", validar.params, librosCtrl.devolver);
 
-router.put("/:id", validar.params,validar.bodyLibro, librosCtrl.cambiar_descripcion);
+router.put("/:id", validar.params,validar.bodyLibroLong, librosCtrl.cambiar_descripcion);
 
 router.get('/:id', validar.params, librosCtrl.buscar);
 

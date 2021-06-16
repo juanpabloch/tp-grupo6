@@ -9,7 +9,7 @@ const {  librosCtrl  ,personasCtrl   ,categoriasCtrl   } = require("../controlle
 
 router.get('/', categoriasCtrl.lista);
 
-router.post('/', validar.validarNombre,categoriasCtrl.agregar);
+router.post('/', validar.bodyCategoria,categoriasCtrl.agregar);
 
 router.get('/:id', validar.params, categoriasCtrl.buscar);
 
