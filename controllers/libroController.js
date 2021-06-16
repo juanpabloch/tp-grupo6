@@ -10,7 +10,7 @@ const cambiar_descripcion = async (req, res, next) => {
       nombre,
       persona_id,
       categoria_id,
-      req.params.id
+      id
     );
 
     if (respuesta.length === 0) {
@@ -128,7 +128,7 @@ const buscar = async (req, res, next) => {
 
 const agregar = async (req, res, next) => {
   try {
-    const { nombre, descripcion, categoria_id, persona_id } = req.body;
+    let { nombre, descripcion, categoria_id, persona_id } = req.body;
 
     if (persona_id === "") {
       persona_id = null;

@@ -10,13 +10,15 @@ const params = (req, res, next) => {
   }
 };
 
-
 const bodyCategoria = (req, res, next) => {
   const { nombre } = req.body;
   try {
-    if (!nombre) throw new Error("Falta enviar datos");
-    if (nombre.length < 3)
-      throw new Error("el nombre debe tener al menos 3 letras");
+    if (!/^[a-zA-ZÀ-ÿ]{2,}\s?(([a-zA-ZÀ-ÿ]{1,}\s?){1,3})/gi.test(nombre))
+      throw new Error(
+        "el nombre debe contener solo caracteres 3 como minimo y deben ser alfabeticos "
+      );
+      if (nombre.length > 70)
+      throw new Error("el nombre no debe tener mas de 70 caracteres");
     next();
   } catch (error) {
     next(error);
@@ -28,14 +30,18 @@ const bodyPersona = (req, res, next) => {
   try {
     if (!nombre || !apellido || !alias || !email)
       throw new Error("Falta enviar datos");
-      if (!/^[a-zA-ZÀ-ÿ]{2,}\s?(([a-zA-ZÀ-ÿ]{1,}\s?){1,3})/gi.test(nombre))
+    if (!/^[a-zA-ZÀ-ÿ]{2,}\s?(([a-zA-ZÀ-ÿ]{1,}\s?){1,3})/gi.test(nombre))
       throw new Error(
         "el nombre debe contener solo caracteres 3 como minimo y deben ser alfabeticos "
       );
-      if (!/^[a-zA-ZÀ-ÿ]{2,}\s?(([a-zA-ZÀ-ÿ]{1,}\s?){1,3})/gi.test(apellido))
+    if (nombre.length > 70)
+      throw new Error("el nombre no debe tener mas de 70 caracteres");
+    if (!/^[a-zA-ZÀ-ÿ]{2,}\s?(([a-zA-ZÀ-ÿ]{1,}\s?){1,3})/gi.test(apellido))
       throw new Error(
         "el nombre debe contener solo caracteres 3 como minimo y deben ser alfabeticos "
       );
+    if (apellido.length > 70)
+      throw new Error("el apellido no debe tener mas de 70 caracteres");
     if (alias.length < 3)
       throw new Error("el alias debe tener al menos 5 caracteres");
     if (!/^[a-z0-9_.]+$/i.test(alias))
@@ -62,7 +68,8 @@ const bodyLibroLong = (req, res, next) => {
       throw new Error(
         "el nombre debe contener solo caracteres 3 como minimo y deben ser alfabeticos "
       );
-
+    if (nombre.length > 70)
+      throw new Error("el nombre no debe tener mas de 70 caracteres");
     descripcion = descripcion.trim();
     req.body.descripcion = descripcion.replace(/  +/gi, " ");
 
