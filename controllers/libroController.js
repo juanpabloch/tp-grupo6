@@ -1,7 +1,5 @@
 const { libro, persona, categoria } = require("../models");
 
-const qy = require("../dataBase/mysqlConnect");
-
 const cambiar_descripcion = async (req, res, next) => {
   try {
     const { nombre, persona_id, categoria_id, descripcion } = req.body;
