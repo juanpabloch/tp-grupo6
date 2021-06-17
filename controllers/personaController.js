@@ -1,5 +1,3 @@
-const qy = require("../dataBase/mysqlConnect");
-
 const { libro, persona, categoria } = require("../models");
 
 const lista = async (req, res, next) => {
