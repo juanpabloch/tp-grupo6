@@ -4,11 +4,12 @@ const cambiar_descripcion = async (req, res, next) => {
   try {
     const { nombre, persona_id, categoria_id, descripcion } = req.body;
     const { id } = req.params;
-    let respuesta = await libro.verificar(nombre, persona_id, categoria_id, id);
 
-    if (respuesta.length === 0) {
-      throw new Error("Solo puedes cambiar la descripcion");
-    }
+    //cambio de codigo: no es necesaria la verificacion
+    // let respuesta = await libro.verificar(nombre, persona_id, categoria_id, id);
+    // if (respuesta.length === 0) {
+    //   throw new Error("Solo puedes cambiar la descripcion");
+    // }
 
     let descripcion_aux = "";
 

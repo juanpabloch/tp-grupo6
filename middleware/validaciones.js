@@ -61,10 +61,13 @@ const bodyPersona = (req, res, next) => {
       throw new Error("el alias debe contener solo caracteres de la a-z");
     if (!/^[a-z0-9_.]+@[a-z0-9]+\.[a-z0-9_.]+$/i.test(email))
       throw new Error("el email debe ser valido");
-    req.body.nombre = nombre;
-    req.body.apellido = apellido;
-    req.body.alias = alias;
-    req.body.email = email;
+    
+    // cambio de codigo: no es necesario
+    // req.body.nombre = nombre;
+    // req.body.apellido = apellido;
+    // req.body.alias = alias;
+    // req.body.email = email;
+    
     next();
   } catch (err) {
     next(err);

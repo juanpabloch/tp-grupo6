@@ -3,7 +3,8 @@ const { libro, persona, categoria } = require("../models");
 const lista = async (req, res, next) => {
   try {
     let respuesta = await persona.lista();
-    if (respuesta.length === 0) throw new Error("no hay personas para mostrar");
+    //cambio de linea de codigo: if (respuesta.length === 0) throw new Error("no hay personas para mostrar");
+    if (respuesta.length === 0) res.status(413).json([]);
     res.status(200).json(respuesta);
   } catch (err) {
     next(err);
@@ -39,9 +40,15 @@ const registrar = async (req, res, next) => {
       email.toUpperCase()
     );
 
-    respuesta = await persona.buscarEmail(email);
+    //cambio de codigo para no realizar otra consulta a la base de datos
+    //respuesta = await persona.buscarEmail(email);
+    res.status(200).json({
+      nombre,
+      apellido,
+      alias,
+      email
+    });
 
-    res.status(200).json(respuesta);
   } catch (err) {
     next(err);
   }
@@ -78,8 +85,9 @@ const modificar = async (req, res, next) => {
     let respuesta = await persona.buscar(id);
     if (respuesta.length === 0) throw new Error("no se encuentra esa persona");
 
-    respuesta = await persona.verificar(email.toUpperCase(), id);
-    if (respuesta.length === 0) throw new Error("No puedes cambiar el mail");
+    //cambio linea de codigo: no es necesario la comprobacion
+    // respuesta = await persona.verificar(email.toUpperCase(), id);
+    // if (respuesta.length === 0) throw new Error("No puedes cambiar el mail");
 
     respuesta = await persona.modificar(
       nombre.toUpperCase(),

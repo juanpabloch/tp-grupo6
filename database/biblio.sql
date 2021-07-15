@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-05-2021 a las 16:56:11
+-- Tiempo de generación: 15-06-2021 a las 17:44:47
 -- Versión del servidor: 10.4.18-MariaDB
 -- Versión de PHP: 8.0.5
 
@@ -37,6 +37,8 @@ CREATE TABLE `categoria` (
 --
 
 INSERT INTO `categoria` (`categoria_id`, `nombre`) VALUES
+(5, 'comedia'),
+(8, 'NOVELA'),
 (1, 'terror');
 
 -- --------------------------------------------------------
@@ -58,7 +60,11 @@ CREATE TABLE `libro` (
 --
 
 INSERT INTO `libro` (`libro_id`, `nombre`, `descripcion`, `categoria_id`, `persona_id`) VALUES
-(1, 'cementerio de animales', 'libro de terror, de animales, tapa rota y hojas amarillas', 1, 1);
+(2, 'cementerio de animales 2', 'libro en buen estado', 1, 1),
+(4, 'los bañeros', 'libro en buen estado jaaaaaaaaa', 5, 1),
+(5, 'ARGENTINA', 'LIBRO EN BUEN ESTADO JAAAAAAAAA', 5, 1),
+(6, 'ARGENTINA2', 'LIBRO EN BUEN ESTADO JAAAAAAAAA 2', 5, NULL),
+(7, 'LOS BA', 'LIBRO EN BUEN ESTADO', 5, 1);
 
 -- --------------------------------------------------------
 
@@ -79,7 +85,7 @@ CREATE TABLE `persona` (
 --
 
 INSERT INTO `persona` (`persona_id`, `nombre`, `apellido`, `email`, `alias`) VALUES
-(1, 'juan pablo', 'choter', 'juan@mail.com', 'rubio');
+(1, 'JUAN PABLO', 'CHOTER', 'juan@mail.com', 'RUBIO');
 
 --
 -- Índices para tablas volcadas
@@ -115,19 +121,19 @@ ALTER TABLE `persona`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `categoria_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `categoria_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `libro`
 --
 ALTER TABLE `libro`
-  MODIFY `libro_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `libro_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `persona`
 --
 ALTER TABLE `persona`
-  MODIFY `persona_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `persona_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restricciones para tablas volcadas

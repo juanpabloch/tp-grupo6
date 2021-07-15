@@ -4,7 +4,7 @@ const { errores, validar } = require("./middleware");
 const router = require("./routes");
 
 //set port
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
 //middlewares
 app.use(express.json());

@@ -2,11 +2,11 @@ const mysql = require('mysql');
 const util = require('util');
 
 const mysqlOptions = {
-    host: 'TU HOST',
-    user: 'TU USUARIO',
-    password: 'TU PASS',
+    host: 'TU-HOST',
+    user: 'TU-USER',
+    password: 'TU-PASSWORD',
     port:3306,
-    database: 'TUDB'
+    database: 'TU-DB'
 }
 const connection = mysql.createConnection(mysqlOptions)
 connection.connect((err)=>{
