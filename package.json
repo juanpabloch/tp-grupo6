@@ -2,8 +2,9 @@
   "name": "tp-grupo",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
+    "main": "index.js",
     "start": "node index.js",
     "dev": "nodemon app.js"
   },

@@ -39,10 +39,12 @@ const registrar = async (req, res, next) => {
       alias.toUpperCase(),
       email.toUpperCase()
     );
-
+    
+    console.log(respuesta)
     //cambio de codigo para no realizar otra consulta a la base de datos
     //respuesta = await persona.buscarEmail(email);
     res.status(200).json({
+      id: respuesta.insertId,
       nombre,
       apellido,
       alias,

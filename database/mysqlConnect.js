@@ -2,10 +2,10 @@ const mysql = require('mysql');
 const util = require('util');
 
 const mysqlOptions = {
+    user: 'ba0c55bd7019ab',
+    password: '69a07376',
     host: 'us-cdbr-east-04.cleardb.com',
-    user: 'be222c4f1fd189',
-    password: 'b28eaa35',
-    database: 'heroku_bad93729dbe0353'
+    database: 'heroku_48eb104884121ab'
 }
 const connection = mysql.createPool(mysqlOptions)
 
@@ -18,6 +18,3 @@ const connection = mysql.createPool(mysqlOptions)
 const qy = util.promisify(connection.query).bind(connection)
 
 module.exports = qy;
-
-
-// mysql://be222c4f1fd189:b28eaa35@us-cdbr-east-04.cleardb.com/heroku_bad93729dbe0353?reconnect=true
