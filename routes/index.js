@@ -8,7 +8,7 @@ const libroRouter = require("./rutaLibro");
 router.get("/", (req, res) => {
   res
     .json({
-      mensaje: "Bienvenido",
+      mensaje: "Bienvenido libros api",
     })
     .status(200);
 });
