@@ -5,7 +5,10 @@ const router = require("./routes");
 
 //set port
 const port = process.env.PORT || 8080;
-
+const cors = require('cors');
+app.use(cors({
+    origin: 'localhost'
+}));
 //middlewares
 app.use(express.json());
 app.use(router);
