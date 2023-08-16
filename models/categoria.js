@@ -4,7 +4,7 @@ class Categoria {
   static async lista() {
     const query = "SELECT * FROM categoria";
     let respuesta = await qy(query);
-    return respuesta;
+    return respuesta.row;
   }
 
   static async eliminar(id) {
