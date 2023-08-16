@@ -13,12 +13,11 @@ const {Pool} = require('pg')
 // const connection = mysql.createPool(mysqlOptions)
 
 const connection = new Pool({
-    connectionString: process.env.POSTGRES_URL + "?sslmode=require",
-    // user: 'postgres',
-    // host: 'localhost',
-    // database: 'postgres',
-    // password: '',
-    // port: 5432,
+    // connectionString: process.env.POSTGRES_URL + "?sslmode=require",
+    user: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PASSWORD,
+    host: process.env.MYSQL_HOST,
+    database: process.env.MYSQL_DATABSE
 })
 
 
@@ -27,6 +26,7 @@ connection.connect((err)=>{
     console.log('base de datos mysql conectada')
 })
 
-// const qy = util.promisify(connection.query).bind(connection)
+const qy = util.promisify(connection.query).bind(connection)
 
-module.exports = connection;
+// module.exports = connection.query;
+module.exports = qy;
