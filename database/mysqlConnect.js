@@ -13,11 +13,11 @@ const {Pool} = require('pg')
 // const connection = mysql.createPool(mysqlOptions)
 
 const connection = new Pool({
-    // connectionString: process.env.POSTGRES_URL + "?sslmode=require",
-    user: process.env.MYSQL_USER,
-    password: process.env.MYSQL_PASSWORD,
-    host: process.env.MYSQL_HOST,
-    database: process.env.MYSQL_DATABSE
+    connectionString: process.env.POSTGRES_URL + "?sslmode=require",
+    // user: process.env.MYSQL_USER,
+    // password: process.env.MYSQL_PASSWORD,
+    // host: process.env.MYSQL_HOST,
+    // database: process.env.MYSQL_DATABSE
 })
 
 
