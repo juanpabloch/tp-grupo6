@@ -4,7 +4,7 @@ class Categoria {
   static async lista() {
     const query = "SELECT * FROM categoria";
     let respuesta = await qy(query);
-    return respuesta.row;
+    return respuesta.rows;
   }
 
   static async eliminar(id) {
@@ -36,7 +36,7 @@ class Categoria {
   }
 
   static async agregar(categoria) {
-    const query = "INSERT INTO categoria(nombre) VALUES($1)";
+    const query = "INSERT INTO categoria(nombre) VALUES($1) RETURNING categoria_id";
     let respuesta = await qy(query, [categoria]);
     return respuesta;
   }
