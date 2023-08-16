@@ -1,4 +1,4 @@
-const qy = require("../dataBase/mysqlConnect");
+const qy = require("../database/mysqlConnect");
 
 class Persona {
   static async lista() {

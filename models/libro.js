@@ -1,4 +1,4 @@
-const qy = require("../dataBase/mysqlConnect");
+const qy = require("../database/mysqlConnect");
 
 class Libro {
   static async estado(id) {
