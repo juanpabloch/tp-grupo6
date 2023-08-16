@@ -100,6 +100,7 @@ const borrar = async (req, res, next) => {
 const lista = async (req, res, next) => {
   try {
     const respuesta = await libro.lista();
+    console.log(respuesta)
     if (respuesta.length === 0)
       throw new Error("No tenemos ningun libro en la biblioteca");
     res.status(200).json(respuesta);

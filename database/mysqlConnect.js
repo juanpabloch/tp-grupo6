@@ -2,20 +2,31 @@ const mysql = require('mysql');
 const util = require('util');
 require('dotenv').config()
 
-const mysqlOptions = {
-    user: process.env.MYSQL_USER,
-    password: process.env.MYSQL_PASSWORD,
-    host: process.env.MYSQL_HOST,
-    database: process.env.MYSQL_DATABSE
-}
-const connection = mysql.createPool(mysqlOptions)
+const {Pool} = require('pg')
+
+// const mysqlOptions = {
+//     user: process.env.MYSQL_USER,
+//     password: process.env.MYSQL_PASSWORD,
+//     host: process.env.MYSQL_HOST,
+//     database: process.env.MYSQL_DATABSE
+// }
+// const connection = mysql.createPool(mysqlOptions)
+
+const connection = new Pool({
+    connectionString: process.env.POSTGRES_URL + "?sslmode=require",
+    // user: 'postgres',
+    // host: 'localhost',
+    // database: 'postgres',
+    // password: '',
+    // port: 5432,
+})
 
 
-// connection.connect((err)=>{
-//     if(err)throw new Error('Error al conectar a la base de datos');
-//     console.log('base de datos mysql conectada')
-// })
+connection.connect((err)=>{
+    if(err)throw new Error('Error al conectar a la base de datos');
+    console.log('base de datos mysql conectada')
+})
 
-const qy = util.promisify(connection.query).bind(connection)
+// const qy = util.promisify(connection.query).bind(connection)
 
-module.exports = qy;
+module.exports = connection;
