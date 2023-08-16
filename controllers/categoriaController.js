@@ -31,7 +31,7 @@ const agregar = async (req, res, next) => {
 
     response = await categoria.agregar(nombre);
 
-    response = await categoria.buscar(response.insertId);
+    // response = await categoria.buscar(response.insertId);
 
     res.status(200).json(response);
   } catch (err) {
