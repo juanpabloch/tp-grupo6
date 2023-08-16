@@ -37,7 +37,7 @@ class Categoria {
 
   static async agregar(categoria) {
     // const query = "INSERT INTO categoria (nombre) VALUE (?)";
-    const query = "INSERT INTO categoria (nombre) VALUE ($1);";
+    const query = "INSERT INTO categoria (nombre) VALUES ($1);";
     let respuesta = await qy(query, [categoria]);
     return respuesta;
   }
