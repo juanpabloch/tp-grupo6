@@ -23,7 +23,7 @@ const connection = new Pool({
 
 connection.connect((err)=>{
     if(err)throw new Error('Error al conectar a la base de datos');
-    console.log('base de datos mysql conectada')
+    console.log('base de datos conectada')
 })
 
 const qy = util.promisify(connection.query).bind(connection)

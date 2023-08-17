@@ -27,7 +27,7 @@ const cambiar_descripcion = async (req, res, next) => {
 
     respuesta = await libro.buscar(id);
 
-    res.status(200).json(respuesta);
+    res.status(200).json(respuesta[0]);
   } catch (err) {
     next(err);
   }
@@ -100,7 +100,6 @@ const borrar = async (req, res, next) => {
 const lista = async (req, res, next) => {
   try {
     const respuesta = await libro.lista();
-    console.log(respuesta)
     if (respuesta.length === 0)
       throw new Error("No tenemos ningun libro en la biblioteca");
     res.status(200).json(respuesta);
@@ -115,7 +114,7 @@ const buscar = async (req, res, next) => {
     const respuesta = await libro.buscar(id);
     if (respuesta.length === 0) throw new Error("no se encuentra ese libro");
 
-    res.status(200).json(respuesta);
+    res.status(200).json(respuesta[0]);
   } catch (err) {
     next(err);
   }
@@ -130,14 +129,13 @@ const agregar = async (req, res, next) => {
     }
     let respuesta = await libro.buscarNombre(nombre.toUpperCase());
     if (respuesta.length) throw new Error("ese libro ya existe");
+
     respuesta = await categoria.buscar(categoria_id);
-    if (respuesta.length === 0)
-      throw new Error("no existe la categoria indicada");
+    if (respuesta.length === 0) throw new Error("no existe la categoria indicada");
 
     if (persona_id) {
       respuesta = await persona.buscar(persona_id);
-      if (respuesta.length === 0)
-        throw new Error("no existe la persona indicada");
+      if (respuesta.length === 0) throw new Error("no existe la persona indicada");
     }
 
     respuesta = await libro.agregar(
@@ -147,10 +145,10 @@ const agregar = async (req, res, next) => {
       persona_id
     );
 
-    const id = respuesta.insertId;
+    const id = respuesta[0].libro_id;
     respuesta = await libro.buscar(id);
 
-    res.status(200).json(respuesta);
+    res.status(200).json(respuesta[0]);
   } catch (err) {
     next(err);
   }

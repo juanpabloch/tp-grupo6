@@ -18,7 +18,7 @@ const buscar = async (req, res, next) => {
     if (respuesta.length === 0) {
       throw new Error("no se encuentra esa persona");
     }
-    res.status(200).json(respuesta);
+    res.status(200).json(respuesta[0]);
   } catch (err) {
     next(err);
   }
@@ -40,11 +40,10 @@ const registrar = async (req, res, next) => {
       email.toUpperCase()
     );
     
-    console.log(respuesta)
     //cambio de codigo para no realizar otra consulta a la base de datos
     //respuesta = await persona.buscarEmail(email);
     res.status(200).json({
-      id: respuesta.insertId,
+      id: respuesta[0].persona_id,
       nombre,
       apellido,
       alias,
@@ -81,7 +80,7 @@ const eliminar = async (req, res, next) => {
 
 const modificar = async (req, res, next) => {
   try {
-    const { nombre, apellido, alias, email } = req.body;
+    const { nombre, apellido, alias} = req.body;
     const { id } = req.params;
 
     let respuesta = await persona.buscar(id);
@@ -100,7 +99,7 @@ const modificar = async (req, res, next) => {
 
     respuesta = await persona.buscar(id);
 
-    res.status(200).json(respuesta);
+    res.status(200).json(respuesta[0]);
   } catch (err) {
     next(err);
   }
